@@ -1,0 +1,44 @@
+
+services:
+  go-up-app:
+    container_name: go-up-front
+    image: go-up-front
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "1000:1000"
+    volumes:
+      - ./frontend:/app
+
+  go-up-admin:
+    container_name: go-up-back
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "2000:2000"
+    volumes:
+      - ./backend:/var/www
+    depends_on:
+      - mysql-db 
+    environment:
+      DB_HOST: mysql-db
+      DB_PORT: 3306
+      DB_DATABASE: go_up_db
+      DB_USERNAME: root
+      DB_PASSWORD: RealNet1
+
+  mysql-db:
+    image: mysql:8.0
+    container_name: mysql-db
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: RealNet1
+      MYSQL_DATABASE: go_up_db
+
+volumes:
+  mysql_data:
