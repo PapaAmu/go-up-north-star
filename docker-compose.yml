@@ -1,44 +1,48 @@
+version: '3.8'
 
 services:
-  go-up-app:
-    container_name: go-up-front
-    image: go-up-front
+  frontend:
+    container_name: goup_front
+    image: goup_front
     build:
       context: ./frontend
       dockerfile: Dockerfile
     ports:
-      - "1000:1000"
+      - "5000:5000"
     volumes:
       - ./frontend:/app
+   
 
-  go-up-admin:
-    container_name: go-up-back
+
+  backend:
+    container_name: goup_admin
+    image: goup_admin
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "2000:2000"
+      - "8003:8003"
     volumes:
       - ./backend:/var/www
     depends_on:
-      - mysql-db 
+      - mysql
     environment:
-      DB_HOST: mysql-db
+      DB_HOST: mysql
       DB_PORT: 3306
-      DB_DATABASE: go_up_db
+      DB_DATABASE: goup_db
       DB_USERNAME: root
       DB_PASSWORD: RealNet1
 
-  mysql-db:
+  mysql:
     image: mysql:8.0
-    container_name: mysql-db
+    container_name: goup-db
     ports:
       - "3307:3306"
     volumes:
       - mysql_data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: RealNet1
-      MYSQL_DATABASE: go_up_db
+      MYSQL_DATABASE: goup_db
 
 volumes:
   mysql_data:
