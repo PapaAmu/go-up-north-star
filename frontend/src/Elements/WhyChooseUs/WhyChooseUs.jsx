@@ -59,7 +59,7 @@ const WhyChooseUs = () => {
               {reasons.map((reason, idx) => (
                 <div
                   key={idx}
-                  className="bg-gray-50 rounded-2xl border-b-4 border-amber-600 p-5 shadow-xl hover:shadow-md transition max-w-xs mx-auto"
+                  className="bg-gray-50 rounded-3xl border-b-2 border-amber-600 p-5 shadow-xl hover:shadow-md transition max-w-xs mx-auto"
                 >
                   <div
                     className={`w-10 h-10 flex items-center justify-center rounded-full mb-3 ${reason.bg}`}

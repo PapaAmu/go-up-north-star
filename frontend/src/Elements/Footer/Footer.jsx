@@ -7,11 +7,15 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-amber-950 text-gray-300 pt-16 pb-8">
+    <>
+    <div className="">
+
+    
+    <footer className="bg-white text-gray-900 pt-16 pb-8 border-t border-gray-300">
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4">
         {/* Column 1: Logo + Subscribe */}
         <div className="md:col-span-2">
-          <div className="mb-4 invert">
+          <div className="mb-4">
             <img src="/logo.png" alt="GoUp North Star Logo" className="h-28 object-contain" />
           </div>
           <p className="text-sm mb-4">
@@ -25,12 +29,12 @@ const Footer = () => {
             />
             <button
               type="submit"
-              className="bg-amber-700 px-3 mr-1 py-1 rounded-full text-sm hover:bg-gray-600 transition-colors"
+              className="bg-amber-700 px-3 mr-1 py-1 text-white hover:text-black rounded-full text-sm hover:bg-amber-400 transition-colors"
             >
               Subscribe
             </button>
           </form>
-          <p className="text-xs text-amber-500">
+          <p className="text-xs text-gray-600">
             By subscribing you agree to our{" "}
             <a
               href="#"
@@ -43,7 +47,7 @@ const Footer = () => {
 
         {/* Column 2: Quick Links */}
         <div className="md:col-span-1">
-          <h3 className="uppercase font-semibold mb-4 text-amber-400">Quick Links</h3>
+          <h3 className="uppercase font-semibold mb-4 text-amber-700">Quick Links</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:text-amber-500 hover:underline">Home</a></li>
             <li><a href="#" className="hover:text-amber-500 hover:underline">About</a></li>
@@ -54,7 +58,7 @@ const Footer = () => {
 
         {/* Column 3: Products */}
         <div className="md:col-span-1">
-          <h3 className="uppercase font-semibold mb-4 text-amber-400">Products</h3>
+          <h3 className="uppercase font-semibold mb-4 text-amber-700">Products</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:text-amber-500 hover:underline">Personal Account</a></li>
             <li><a href="#" className="hover:text-amber-500 hover:underline">Business Solutions</a></li>
@@ -65,7 +69,7 @@ const Footer = () => {
 
         {/* Column 4: Company */}
         <div className="md:col-span-1">
-          <h3 className="uppercase font-semibold mb-4 text-amber-400">Company</h3>
+          <h3 className="uppercase font-semibold mb-4 text-amber-700">Company</h3>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="hover:text-amber-500 hover:underline">About</a></li>
             <li><a href="#" className="hover:text-amber-500 hover:underline">Privacy Policy</a></li>
@@ -76,7 +80,7 @@ const Footer = () => {
 
         {/* Column 5: Contact Us */}
         <div className="md:col-span-1">
-          <h3 className="uppercase font-semibold mb-4 text-amber-400">CONTACT US</h3>
+          <h3 className="uppercase font-semibold mb-4 text-amber-700">CONTACT US</h3>
          
           <h4>123 Street, Location , Gauteng, Midrand 0000</h4>
            <div className="flex gap-4 text-lg pt-8">
@@ -88,8 +92,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t container border-amber-500 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
-        <p className="text-amber-200 text-xs leading-4">
+      <div className="border-t container border-gray-400 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+        <p className="text-black text-xs leading-4">
           © 2025 REALNET WEB SOLUTIONS | All Rights Reserved.
         </p>
         <div className="flex gap-4">
@@ -101,6 +105,8 @@ const Footer = () => {
         </div>
       </div>
     </footer>
+    </div>
+    </>
   );
 };
 

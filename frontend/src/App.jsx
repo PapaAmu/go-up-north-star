@@ -5,6 +5,8 @@ import BankingServices from "./Elements/BankingServices/BankingServices";
 import WhatWeDo from "./Elements/BankingServices/WhatWeDo";
 import WhyChooseUs from "./Elements/WhyChooseUs/WhyChooseUs";
 import Footer from "./Elements/Footer/Footer";
+
+import ApplyBanner from "./Elements/ApplyBanner/ApplyBanner";
 import "./App.css";
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
       <WhatWeDo />
       <BankingServices />
       <WhyChooseUs />
+      <ApplyBanner />
       <Footer />
     
     </>
