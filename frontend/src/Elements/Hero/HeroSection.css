@@ -1,0 +1,24 @@
+.custom-card {
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.rotate-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  overflow: hidden;
+}
+
+.rotate-title {
+  transform: rotate(-90deg);
+  transform-origin: center;
+  white-space: nowrap;
+  max-width: 100%;
+  text-align: center;
+}
