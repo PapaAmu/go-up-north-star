@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FiPieChart, FiShield } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 import card1 from "../../assets/cardImages/card1.png";
 import card2 from "../../assets/cardImages/card2.png";
 import card3 from "../../assets/cardImages/card3.png";
@@ -9,21 +9,21 @@ import "./HeroSection.css";
 
 const cards = [
   {
-    title: "Personal",
+    title: "Savings Solutions",
     content:
       "Manage your money with smarter tools that help you track spending, set goals, and save effortlessly.",
     bgColor: "bg-amber-400",
     sideImage: card1,
   },
   {
-    title: "Business",
+    title: "Group Lending",
     content:
       "Streamline payments, payroll, and team expenses with a secure, all-in-one business banking solution.",
     bgColor: "bg-amber-600",
     sideImage: card2,
   },
   {
-    title: "Investing",
+    title: "Membership",
     content:
       "Grow your wealth with intelligent insights, real-time tracking, and tailored investment options.",
     bgColor: "bg-amber-800",
@@ -43,13 +43,25 @@ const HeroSection = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const introRef = useRef(null);
+  const introInView = useInView(introRef, { once: false, margin: "-20% 0px" });
+
+  const contentRef = useRef(null);
+  const contentInView = useInView(contentRef, { once: false, margin: "-20% 0px" });
+
   return (
     <section className="bg-white py-10">
       {/* Top Intro Section */}
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center mb-8">
+      <motion.div
+        ref={introRef}
+        initial={{ opacity: 0, y: 40 }}
+        animate={introInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center mb-8"
+      >
         <div>
           <p className="text-xs font-bold text-amber-600 uppercase mb-1 tracking-wide">
-            Digital Banking
+            together we rise
           </p>
           <h1 className="text-2xl md:text-3xl text-gray-900 leading-snug">
             Discover the{" "}
@@ -62,7 +74,7 @@ const HeroSection = () => {
               >
                 <path
                   d="M0 10 Q 50 0 100 10"
-                  stroke="#f59e0b" // Tailwind amber-500
+                  stroke="#f59e0b"
                   strokeWidth="2"
                   fill="none"
                 />
@@ -72,11 +84,15 @@ const HeroSection = () => {
           </h1>
         </div>
 
-        {/* Centered Paragraph and Button */}
-        <div className="flex flex-col items-center text-center gap-4">
+        <motion.div
+          ref={contentRef}
+          initial={{ opacity: 0, y: 40 }}
+          animate={contentInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="flex flex-col items-center text-center gap-4"
+        >
           <p className="text-gray-600 text-sm max-w-sm">
-            Get business banking, card, bill pay, travel, and reimbursements —
-            all in one scalable solution.
+           A new era of inclusive banking for our people
           </p>
 
           <button className="inline-flex items-center gap-2 bg-gray-950 text-white px-2 py-1 rounded-full text-sm font-medium hover:bg-gray-800 transition">
@@ -85,8 +101,8 @@ const HeroSection = () => {
               <FaArrowRight className="w-4 h-4 text-black" />
             </span>
           </button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Cards Section */}
       <div
@@ -100,26 +116,28 @@ const HeroSection = () => {
         {cards.map((card, index) => {
           const isActive = index === activeIndex;
 
+          const cardRef = useRef(null);
+          const cardInView = useInView(cardRef, { once: false, margin: "-10% 0px" });
+
           return (
             <motion.div
               key={card.title}
+              ref={cardRef}
               layout
               transition={{ duration: 0.5 }}
               onClick={() => {
                 if (!isActive) setActiveIndex(index);
               }}
-              className={`custom-card relative flex flex-col border rounded-3xl shadow-lg transition-all duration-500 ease-in-out cursor-pointer overflow-hidden ${
-                isActive ? "shadow-lg" : "shadow-lg"
-              } ${card.bgColor}`}
+              className={`custom-card relative flex flex-col border rounded-3xl shadow-lg transition-all duration-500 ease-in-out cursor-pointer overflow-hidden ${card.bgColor}`}
             >
               <AnimatePresence mode="wait">
-                {isActive && (
+                {isActive && cardInView && (
                   <motion.div
                     key="content"
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.4 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
                     className="relative z-10 flex flex-grow gap-4 min-h-[250px]"
                   >
                     {/* LEFT SIDE */}
@@ -131,9 +149,14 @@ const HeroSection = () => {
                         {card.content}
                       </p>
 
-                      {/* More Info Cards - SIDE BY SIDE */}
+                      {/* Info Cards */}
                       <div className="flex flex-row gap-4">
-                        <div className="bg-white rounded-3xl shadow p-4 text-sm text-gray-700 flex items-start gap-3 w-full max-w-[200px]">
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2, duration: 0.4 }}
+                          className="bg-white rounded-3xl shadow p-4 text-sm text-gray-700 flex items-start gap-3 w-full max-w-[200px]"
+                        >
                           <FiPieChart className="text-green-600 w-14 h-5" />
                           <div>
                             <h4 className="font-semibold mb-1 text-sm">
@@ -144,8 +167,13 @@ const HeroSection = () => {
                               your goals faster.
                             </p>
                           </div>
-                        </div>
-                        <div className="bg-white rounded-3xl shadow p-4 text-sm text-gray-700 flex items-start gap-3 w-full max-w-[200px]">
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4, duration: 0.4 }}
+                          className="bg-white rounded-3xl shadow p-4 text-sm text-gray-700 flex items-start gap-3 w-full max-w-[200px]"
+                        >
                           <FiShield className="text-green-600 w-14 h-5" />
                           <div>
                             <h4 className="font-semibold mb-1 text-sm">
@@ -156,7 +184,7 @@ const HeroSection = () => {
                               manage finances easily.
                             </p>
                           </div>
-                        </div>
+                        </motion.div>
                       </div>
                     </div>
 
@@ -172,7 +200,6 @@ const HeroSection = () => {
                 )}
               </AnimatePresence>
 
-              {/* Rotated title on collapsed cards */}
               {!isActive && (
                 <div className="relative z-10 rotate-wrapper">
                   <h3 className="rotate-title text-2xl text-white font-light">
@@ -181,7 +208,6 @@ const HeroSection = () => {
                 </div>
               )}
 
-              {/* Next Button */}
               {isActive && (
                 <button
                   onClick={(e) => {

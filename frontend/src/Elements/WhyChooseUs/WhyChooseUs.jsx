@@ -1,5 +1,7 @@
 import { FaHandsHelping, FaRegSmileBeam, FaShieldAlt } from "react-icons/fa";
 import ServiceImg from "../../assets/service.webp";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const reasons = [
   {
@@ -22,23 +24,39 @@ const reasons = [
   },
 ];
 
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      delay: i * 0.15,
+    },
+  }),
+};
+
 const WhyChooseUs = () => {
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: false, amount: 0.2 });
+
   return (
     <section className="py-20 bg-white px-4">
       <div className="container mx-auto max-w-7xl">
-        {/* Image Section with Overlay and Text */}
-        <div className="relative rounded-2xl overflow-hidden">
-          {/* Full Image */}
+        {/* Image Section */}
+        <motion.div
+          ref={ref}
+          variants={fadeUp}
+          initial="hidden"
+          animate={inView ? "visible" : "hidden"}
+          className="relative rounded-2xl overflow-hidden"
+        >
           <img
             src={ServiceImg}
             alt="Our services"
             className="w-full h-auto object-contain"
           />
 
-          {/* Dark Overlay */}
-          <div className="absolute inset-0  z-0" />
-
-          {/* Text Content */}
           <div className="absolute inset-0 z-10 flex items-center justify-end px-6 md:px-16">
             <div className="text-white text-right max-w-xl ml-auto">
               <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
@@ -50,15 +68,19 @@ const WhyChooseUs = () => {
               </p>
             </div>
           </div>
-        </div>
+        </motion.div>
 
-        {/* Cards Grid: Overlapping on Desktop */}
+        {/* Cards Grid */}
         <div className="relative">
           <div className="mt-10 md:-mt-16 px-4">
-            <div className="grid gap-6 grid-cols-1  sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto">
+            <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto">
               {reasons.map((reason, idx) => (
-                <div
+                <motion.div
                   key={idx}
+                  custom={idx}
+                  variants={fadeUp}
+                  initial="hidden"
+                  animate={inView ? "visible" : "hidden"}
                   className="bg-gray-50 rounded-3xl border-b-2 border-amber-600 p-5 shadow-xl hover:shadow-md transition max-w-xs mx-auto"
                 >
                   <div
@@ -70,7 +92,7 @@ const WhyChooseUs = () => {
                     {reason.title}
                   </h3>
                   <p className="text-sm text-gray-600">{reason.description}</p>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
