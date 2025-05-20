@@ -1,13 +1,10 @@
 import { useState } from "react";
 import {
-  FaBars,
-  FaTimes,
   FaChevronDown,
   FaSearch,
   FaUserPlus,
 } from "react-icons/fa";
 import { IoGridSharp, IoGridOutline } from "react-icons/io5";
-
 import { FiUser } from "react-icons/fi";
 import SearchOverlay from "./SearchOverlay";
 import MobileMenu from "./MobileMenu";
@@ -89,8 +86,9 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Desktop Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
+            {/* Buttons - visible on all screens now */}
+            <div className="flex items-center space-x-2 md:space-x-4">
+              {/* Search Button */}
               <button
                 onClick={() => setShowSearch(true)}
                 className="text-black rounded-full hover:text-blue-600"
@@ -99,17 +97,20 @@ const Navbar = () => {
                 <FaSearch />
               </button>
 
+              {/* Login Button */}
               <button
-                className="text-black font-semibold border border-black px-4 py-1 rounded-full flex items-center gap-2"
+                className="text-black font-semibold md:border border-black px-3 py-1 rounded-full flex items-center gap-2 text-sm"
                 title="Login"
               >
                 <FiUser />
-                <span className="font-normal">Login</span>
+                <span className="font-normal hidden md:block">Login</span>
               </button>
 
-              <button className="border border-gray-800 text-gray-800 px-2 py-1 rounded-full hover:text-blue-600 transition flex items-center gap-2">
-                Join Us
-                <FaUserPlus className="text-white bg-gray-800 p-1 text-2xl rounded-full" />
+              {/* Join Us */}
+              <button className="md:border md:border-gray-800 text-gray-800 px-2 py-1 rounded-full hover:text-blue-600 transition flex items-center gap-2 text-sm">
+               
+                <FaUserPlus className="text-white bg-gray-800 p-1 text-xl rounded-full" />
+                <span className="font-normal hidden md:block">Join Us</span>
               </button>
             </div>
 
@@ -126,7 +127,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        {/* Mobile Menu (separate component) */}
+        {/* Mobile Menu */}
         {isOpen && (
           <MobileMenu
             navLinks={navLinks}

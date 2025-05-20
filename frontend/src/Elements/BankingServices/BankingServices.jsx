@@ -25,7 +25,6 @@ const services = [
     icon: <FaWallet className="text-white text-2xl" />,
     title: "Wealth Management",
   },
-  
 ];
 
 const fadeUp = {
@@ -65,12 +64,14 @@ const BankingServices = () => {
               We offer a variety of tools and resources to help you manage your
               finances more effectively.
             </p>
-            <button className="inline-flex items-center gap-2 bg-gray-950 text-white px-3 py-1 rounded-full text-sm font-medium hover:bg-lime-400 transition">
-              Explore More
-              <span className="bg-amber-600 text-white p-2 rounded-full">
-                <BsArrowUpRight className="w-4 h-4" />
-              </span>
-            </button>
+            <div className="flex justify-center md:justify-start">
+              <button className="inline-flex items-center gap-2 bg-gray-950 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-400 transition">
+                Explore More
+                <span className="bg-amber-600 text-white p-2 rounded-full">
+                  <BsArrowUpRight className="w-4 h-4" />
+                </span>
+              </button>
+            </div>
           </motion.div>
 
           {/* Right Column: Services Grid */}

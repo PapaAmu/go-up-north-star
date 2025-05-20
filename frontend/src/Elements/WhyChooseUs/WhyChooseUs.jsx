@@ -54,15 +54,15 @@ const WhyChooseUs = () => {
           <img
             src={ServiceImg}
             alt="Our services"
-            className="w-full h-auto object-contain"
+            className="w-full md:h-auto object-contain"
           />
 
-          <div className="absolute inset-0 z-10 flex items-center justify-end px-6 md:px-16">
-            <div className="text-white text-right max-w-xl ml-auto">
-              <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4">
+          <div className="absolute inset-0 z-10 flex items-center justify-end px-2 md:px-8">
+            <div className="text-white text-right mt-10 max-w-xl ml-auto">
+              <h2 className="text-lg md:text-6xl font-bold md:mb-4 mt-8">
                 Why Choose Us
               </h2>
-              <p className="text-sm leading-relaxed">
+              <p className="md:text-sm hidden md:block text-xs leading-relaxed">
                 We're committed to helping you succeed by providing the best tools,
                 support, and security you can count on.
               </p>
@@ -72,7 +72,14 @@ const WhyChooseUs = () => {
 
         {/* Cards Grid */}
         <div className="relative">
-          <div className="mt-10 md:-mt-16 px-4">
+          <div className="md:-mt-16 px-4">
+            <div className="text-white md:hidden text-center mt-10 max-w-xl ml-auto">
+             
+              <p className="md:text-sm text-xs text-gray-800 leading-relaxed">
+                We're committed to helping you succeed by providing the best tools,
+                support, and security you can count on.
+              </p>
+            </div>
             <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 max-w-5xl mx-auto">
               {reasons.map((reason, idx) => (
                 <motion.div

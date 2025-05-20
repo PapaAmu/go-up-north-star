@@ -39,7 +39,7 @@ const WhatWeOffer = () => {
             <img
               src={OfficePic}
               alt="Financial Experts"
-              className="md:h-[400px] ml-[200px] object-content rounded-2xl"
+              className="md:h-[400px] md:ml-[200px] object-content rounded-2xl"
             />
             <div className="absolute h-20 bg-amber-500 w-64 bottom-2 right-2 p-4 flex justify-between items-center">
               <div className="text-2xl font-bold text-amber-600">↗</div>
@@ -48,13 +48,13 @@ const WhatWeOffer = () => {
               <div className="font-semibold text-white">
                 Best Financial Experts Because
               </div>
-              <div className="text-4xl font-bold text-amber-300">↗</div>
+              <div className="text-4xl font-bold text-amber-300 md:block hidden">↗</div>
             </div>
           </motion.div>
 
           {/* Right: Offer List */}
           <div className="space-y-6">
-            <div className="pb-6 text-xl text-amber-700">
+            <div className="pb-6 text-xl text-gray-800">
               Our mission is to empower our community through accessible and
               fair financial services, promoting economic growth and stability.
             </div>
@@ -95,19 +95,23 @@ const WhatWeOffer = () => {
                   </div>
                 </motion.li>
               ))}
-            </ul>
+                       </ul>
 
-            <motion.button
-              variants={fadeUpVariant}
-              initial="hidden"
-              animate={inView ? "visible" : "hidden"}
-              className="inline-flex items-center gap-2 bg-gray-950 text-white px-2 py-1 rounded-full text-sm font-medium hover:bg-gray-800 transition"
-            >
-              Learn More
-              <span className="bg-amber-500 p-2 rounded-full">
-                <TiInfoLarge className="w-4 h-4 text-black" />
-              </span>
-            </motion.button>
+            {/* Centered Button */}
+            <div className="flex justify-center">
+              <motion.button
+                variants={fadeUpVariant}
+                initial="hidden"
+                animate={inView ? "visible" : "hidden"}
+                className="inline-flex items-center gap-2 bg-gray-950 text-white px-3 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition"
+              >
+                More About-Us
+                <span className="bg-amber-500 p-2 rounded-full">
+                  <TiInfoLarge className="w-4 h-4 text-black" />
+                </span>
+              </motion.button>
+            </div>
+
           </div>
         </div>
       </section>
