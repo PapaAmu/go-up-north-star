@@ -28,7 +28,7 @@ const Footer = () => {
           variants={fadeUp}
           initial="hidden"
           animate={isInView ? "visible" : "hidden"}
-          className="bg-white text-gray-900 pt-16 pb-8 border-t border-gray-300"
+          className="bg-white text-gray-900 pt-16 pb-8 border-t border-gray-400"
         >
           <div className="container mx-auto grid grid-cols-1 md:grid-cols-6 gap-4">
             {/* Column 1: Logo + Subscribe */}
@@ -160,8 +160,8 @@ const Footer = () => {
                 CONTACT US
               </h3>
 
-              <h4>123 Street, Location , Gauteng, Midrand 0000</h4>
-              <div className="flex gap-4 text-lg pt-8">
+              <h4 className="text-sm">123 Street, Location , Gauteng, Midrand 0000</h4>
+              <div className="flex gap-4 text-2xl pt-8">
                 <a
                   href="#"
                   className="hover:text-amber-500 hover:underline"
@@ -193,19 +193,19 @@ const Footer = () => {
               <a
                 href="https://realnet-web.co.za/"
                 target="_blank"
-                className="hover:text-amber-500 text-gray-400 hover:underline"
+                className="hover:text-amber-500 text-gray-900 hover:underline"
               >
                 About Developers
               </a>
               <a
                 href="#"
-                className="hover:text-amber-500 text-gray-400 hover:underline"
+                className="hover:text-amber-500 text-gray-900 hover:underline"
               >
                 <FaFacebookF />
               </a>
               <a
                 href="#"
-                className="hover:text-amber-500 text-gray-400 hover:underline"
+                className="hover:text-amber-500 text-gray-900 hover:underline"
               >
                 <FaInstagram />
               </a>

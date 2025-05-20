@@ -38,7 +38,7 @@ const fadeUp = {
 
 const WhyChooseUs = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, amount: 0.2 });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
     <section className="py-20 bg-white px-4">

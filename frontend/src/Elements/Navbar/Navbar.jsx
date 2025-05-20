@@ -1,18 +1,19 @@
 import { useState } from "react";
-import {
-  FaChevronDown,
-  FaSearch,
-  FaUserPlus,
-} from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import { FaUserPlus } from "react-icons/fa";
+import { GoSearch } from "react-icons/go";
 import { IoGridSharp, IoGridOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import SearchOverlay from "./SearchOverlay";
 import MobileMenu from "./MobileMenu";
+import NavDropdown from "./NavDropdown";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [showSearch, setShowSearch] = useState(false);
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const handleDropdown = (name) =>
     setOpenDropdown(openDropdown === name ? null : name);
@@ -26,10 +27,10 @@ const Navbar = () => {
       name: "Business",
       dropdown: ["SME Services", "Business Loans", "Merchant Tools"],
     },
-    { name: "Talk to us", href: "#talk-to-us" },
-    { name: "Loans", href: "#loans" },
-    { name: "Investors", href: "#investors" },
-    { name: "News & Updates", href: "#investors" },
+    { name: "Talk to us", href: "/talk-to-us" },
+    { name: "Loans", href: "/money-loan" },
+    { name: "Investors", href: "/investing" },
+    { name: "News & Updates", href: "/news-and-updates" },
   ];
 
   return (
@@ -52,33 +53,21 @@ const Navbar = () => {
             <div className="hidden md:flex flex-1 justify-center space-x-6">
               {navLinks.map((link) =>
                 link.dropdown ? (
-                  <div key={link.name} className="relative group">
-                    <button
-                      onClick={() => handleDropdown(link.name)}
-                      className="flex text-xs uppercase items-center space-x-1 text-gray-700 hover:text-blue-700 font-medium"
-                    >
-                      <span>{link.name}</span>
-                      <FaChevronDown className="w-4 h-4" />
-                    </button>
-                    {openDropdown === link.name && (
-                      <div className="absolute bg-white shadow-lg rounded-md mt-2 py-2 w-48 z-10">
-                        {link.dropdown.map((item) => (
-                          <a
-                            key={item}
-                            href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                          >
-                            {item}
-                          </a>
-                        ))}
-                      </div>
-                    )}
-                  </div>
+                  <NavDropdown
+                    key={link.name}
+                    link={link}
+                    isOpen={openDropdown === link.name}
+                    handleDropdown={handleDropdown}
+                  />
                 ) : (
                   <a
                     key={link.name}
                     href={link.href}
-                    className="text-gray-700 text-xs uppercase hover:text-blue-700 font-medium"
+                    className={`text-xs uppercase font-medium duration-300 hover:underline ${
+                      currentPath === link.href
+                        ? "text-amber-700"
+                        : "text-gray-900 hover:text-amber-600"
+                    }`}
                   >
                     {link.name}
                   </a>
@@ -86,48 +75,43 @@ const Navbar = () => {
               )}
             </div>
 
-            {/* Buttons - visible on all screens now */}
+            {/* Right Side Buttons */}
             <div className="flex items-center space-x-2 md:space-x-4">
-              {/* Search Button */}
               <button
                 onClick={() => setShowSearch(true)}
-                className="text-black rounded-full hover:text-blue-600"
+                className="text-gray-900"
                 title="Search"
               >
-                <FaSearch />
+                <GoSearch className="text-2xl md:text-gray-950 hover:text-amber-600 duration-300 hover:scale-110 text-amber-700 mb-1.5 md:mb-0" />
               </button>
 
-              {/* Login Button */}
               <button
-                className="text-black font-semibold md:border border-black px-3 py-1 rounded-full flex items-center gap-2 text-sm"
+                className="group text-gray-900 hidden font-semibold border hover:scale-110 duration-500 border-gray-900 px-3 py-1 rounded-full md:flex items-center gap-2 text-sm transition hover:bg-amber-600 hover:border-amber-600 hover:text-white"
                 title="Login"
               >
-                <FiUser />
+                <FiUser className="transition-transform duration-300 group-hover:scale-110" />
                 <span className="font-normal hidden md:block">Login</span>
               </button>
 
-              {/* Join Us */}
-              <button className="md:border md:border-gray-800 text-gray-800 px-2 py-1 rounded-full hover:text-blue-600 transition flex items-center gap-2 text-sm">
-               
-                <FaUserPlus className="text-white bg-gray-800 p-1 text-xl rounded-full" />
+              <button className="group hidden md:flex items-center gap-2 text-sm hover:scale-110 border border-gray-900 text-gray-900 px-2 py-1 rounded-full transition duration-500 hover:bg-amber-600 hover:text-white hover:border-amber-600">
+                <FaUserPlus className="text-white bg-gray-900 p-1 hover:bg-white hover:text-gray-900 text-xl rounded-full transition-transform duration-300 group-hover:scale-105" />
                 <span className="font-normal hidden md:block">Join Us</span>
               </button>
-            </div>
 
-            {/* Mobile Hamburger */}
-            <div className="md:hidden">
-              <button onClick={() => setIsOpen(!isOpen)}>
-                {isOpen ? (
-                  <IoGridOutline className="w-6 h-6" />
-                ) : (
-                  <IoGridSharp className="w-6 h-6" />
-                )}
-              </button>
+              {/* Mobile Hamburger */}
+              <div className="md:hidden">
+                <button onClick={() => setIsOpen(!isOpen)}>
+                  {isOpen ? (
+                    <IoGridOutline className="w-6 h-6 text-amber-700" />
+                  ) : (
+                    <IoGridSharp className="w-6 h-6 text-amber-700" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
           <MobileMenu
             navLinks={navLinks}

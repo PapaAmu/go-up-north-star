@@ -14,7 +14,7 @@ const fadeUp = {
 
 const ApplyBanner = () => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: false, amount: 0.4 });
+  const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
     <div className="container px-4">
@@ -24,7 +24,7 @@ const ApplyBanner = () => {
           variants={fadeUp}
           initial="hidden"
           animate={inView ? "visible" : "hidden"}
-          className="relative bg-gradient-to-r from-amber-600 to-amber-900 text-white rounded-3xl w-full text-center overflow-hidden shadow-lg px-6 sm:px-12 py-12 sm:py-16"
+          className="relative bg-gradient-to-r from-amber-600 to-amber-900 text-white rounded-3xl w-full text-center overflow-hidden shadow-2xl px-6 sm:px-12 py-12 sm:py-16"
         >
           {/* Left angled shape */}
           <div className="absolute z-0 left-0 top-1/2 transform -translate-y-1/2 w-32 sm:w-48 h-28 sm:h-36 bg-amber-500 rounded-lg rotate-[20deg] -ml-6 sm:-ml-8"></div>
@@ -34,9 +34,9 @@ const ApplyBanner = () => {
 
           {/* Foreground content */}
           <div className="relative z-10">
-            <h2 className="text-2xl sm:text-4xl md:text-5xl font-semibold mb-4">
+            <h2 className="text-3xl md:text-5xl font-semibold mb-4">
               Simplify payments
-              <br className="hidden sm:block" />
+              <br className=" sm:block" />
               management
             </h2>
             <p className="text-sm sm:text-base text-purple-100 mb-6 max-w-md mx-auto">
@@ -44,7 +44,7 @@ const ApplyBanner = () => {
               wherever you want to use it.
             </p>
 
-            <button className="bg-white text-purple-900 font-semibold px-6 py-2 rounded-full shadow hover:bg-purple-100 transition">
+            <button className="bg-white text-amber-700 hover:scale-110 duration-500 font-semibold px-6 py-2 rounded-full shadow hover:bg-purple-100 transition">
               Apply Now
             </button>
           </div>

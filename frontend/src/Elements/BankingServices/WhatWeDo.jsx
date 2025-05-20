@@ -11,7 +11,7 @@ const fadeUpVariant = {
 
 const WhatWeOffer = () => {
   const sectionRef = useRef(null);
-  const inView = useInView(sectionRef, { once: false, amount: 0.2 });
+  const inView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
     <div className="container">
