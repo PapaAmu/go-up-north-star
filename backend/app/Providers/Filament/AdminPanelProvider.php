@@ -25,6 +25,10 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id('admin')
+            ->brandLogo(asset('images/logo.png'))
+            ->brandLogoHeight('5rem')
+            ->favicon(asset('images/favicon.ico'))
+            ->font('Poppins')
             ->path('admin')
             ->login()
             ->colors([

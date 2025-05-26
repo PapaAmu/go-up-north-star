@@ -3,13 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\FileResource\Pages;
+use App\Filament\Actions\DownloadFileAction;
 use App\Models\File;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables\Table;
 use Filament\Forms;
 use Filament\Tables;
+use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class FileResource extends Resource
 {
@@ -100,9 +103,11 @@ class FileResource extends Resource
 
                 Tables\Columns\TextColumn::make('path')
                     ->label('Preview / Download')
-                    ->formatStateUsing(function ($state) {
-                        $url = Storage::url($state);
+                    ->formatStateUsing(function ($state, $record) {
+                        $url = Storage::url($record->path);
+                        Log::info('File URL: ' . $url);
                         $ext = pathinfo($url, PATHINFO_EXTENSION);
+                        Log::info('File Extension: ' . $ext);
 
                         if (in_array(strtolower($ext), ['jpg', 'jpeg', 'png', 'gif'])) {
                             return '<img src="' . $url . '" style="max-height: 60px;" />';
@@ -116,7 +121,14 @@ class FileResource extends Resource
                     })
                     ->html(),
             ])
-            ->filters([]);
+            ->filters([])
+            ->actions([
+                DownloadFileAction::make('download'),
+
+                DeleteAction::make('delete')
+                    ->label('Delete')
+                    ->color('danger'),
+            ]);
     }
 
     public static function getRelations(): array
