@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom"; // ✅ Add Link
 import { FaUserPlus } from "react-icons/fa";
 import { GoSearch } from "react-icons/go";
 import { IoGridSharp, IoGridOutline } from "react-icons/io5";
@@ -98,10 +98,14 @@ const Navbar = () => {
                 <span className="font-normal hidden md:block">Login</span>
               </button>
 
-              <button className="group hidden md:flex items-center gap-2 text-sm hover:scale-110 border border-gray-900 text-gray-900 px-2 py-1 rounded-full transition duration-500 hover:bg-amber-600 hover:text-white hover:border-amber-600">
+              {/* "Join Us" Button as Link */}
+              <Link
+                to="/join-us"
+                className="group hidden md:flex items-center gap-2 text-sm hover:scale-110 border border-gray-900 text-gray-900 px-2 py-1 rounded-full transition duration-500 hover:bg-amber-600 hover:text-white hover:border-amber-600"
+              >
                 <FaUserPlus className="text-white bg-gray-900 p-1 hover:bg-white hover:text-gray-900 text-xl rounded-full transition-transform duration-300 group-hover:scale-105" />
                 <span className="font-normal hidden md:block">Join Us</span>
-              </button>
+              </Link>
 
               {/* Mobile Hamburger */}
               <div className="md:hidden">

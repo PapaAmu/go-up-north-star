@@ -11,6 +11,7 @@ import Loans from "./Elements/Loans/Loans";
 import Investors from "./Elements/Investors/Investors";
 import NewsAndUpdates from "./Elements/NewsAndUpdates/NewsAndUpdates";
 import "./App.css";
+import JoinUs from "./Elements/JoinUs/JoinUs";
 
 function Home() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path="/money-loan" element={<Loans />} />
         <Route path="/investing" element={<Investors />} />
         <Route path="/news-and-updates" element={<NewsAndUpdates />} />
+        <Route path="/join-us" element={<JoinUs />} />
       </Routes>
       <Footer />
     </Router>

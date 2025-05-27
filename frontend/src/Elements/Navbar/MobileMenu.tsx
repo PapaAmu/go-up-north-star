@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { FaChevronDown, FaUserPlus } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight, FaUserPlus } from "react-icons/fa";
 import { FiUser } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 interface MobileMenuProps {
   navLinks: {
@@ -15,22 +16,18 @@ interface MobileMenuProps {
 
 const MobileMenu = ({
   navLinks,
-  openDropdown,
-  handleDropdown,
   onClose,
 }: MobileMenuProps) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [animateIn, setAnimateIn] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<null | string>(null); // active submenu
 
   useEffect(() => {
     setTimeout(() => setAnimateIn(true), 10);
 
     const handleClickOutside = (event: MouseEvent) => {
-      if (
-        menuRef.current &&
-        !menuRef.current.contains(event.target as Node)
-      ) {
-        onClose(); // Close menu if click is outside
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        onClose();
       }
     };
 
@@ -38,12 +35,12 @@ const MobileMenu = ({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [onClose]);
 
+  const handleBack = () => setActiveMenu(null);
+
   return (
     <>
-      {/* Overlay */}
       <div className="fixed inset-0 bg-black bg-opacity-30 z-40" />
 
-      {/* Slide-in Menu */}
       <div
         ref={menuRef}
         className={`fixed top-0 left-0 h-full w-64 bg-white shadow-md z-50 transform transition-transform duration-300 ${
@@ -51,54 +48,82 @@ const MobileMenu = ({
         }`}
       >
         <div className="px-4 pt-6 pb-6 space-y-4">
-          {navLinks.map((link) =>
-            link.dropdown ? (
-              <div key={link.name}>
-                <button
-                  onClick={() => handleDropdown(link.name)}
-                  className="flex justify-between w-full text-left text-gray-700 font-medium"
-                >
-                  {link.name}
-                  <FaChevronDown className="w-4 h-4 inline ml-2" />
-                </button>
-                {openDropdown === link.name && (
-                  <div className="ml-4 mt-1 space-y-1">
-                    {link.dropdown.map((item) => (
-                      <a
-                        key={item}
-                        href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                        className="block text-sm text-gray-600"
-                      >
-                        {item}
-                      </a>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <a
-                key={link.name}
-                href={link.href}
-                className="block text-gray-700 font-medium"
+          {/* Submenu view */}
+          {activeMenu ? (
+            <div className="space-y-2">
+              <button
+                onClick={handleBack}
+                className="text-sm text-gray-600 flex items-center gap-2 mb-4"
               >
-                {link.name}
-              </a>
-            )
+                <FaChevronLeft />
+                Back
+              </button>
+
+              <h3 className="text-md font-semibold text-gray-800 mb-2">
+                {activeMenu}
+              </h3>
+
+              {navLinks
+                .find((link) => link.name === activeMenu)
+                ?.dropdown?.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                    className="block text-sm text-gray-600"
+                  >
+                    {item}
+                  </a>
+                ))}
+            </div>
+          ) : (
+            // Main navigation view
+            <div className="space-y-3">
+              {navLinks.map((link) =>
+                link.dropdown ? (
+                  <button
+                    key={link.name}
+                    onClick={() => setActiveMenu(link.name)}
+                    className="w-full text-left text-gray-700 font-medium flex justify-between items-center"
+                  >
+                    {link.name}
+                    <FaChevronRight className="w-4 h-4 inline" />
+                  </button>
+                ) : (
+                  <Link
+                    key={link.name}
+                    to={link.href || "/"}
+                    className="block text-gray-700 font-medium"
+                    onClick={onClose}
+                  >
+                    {link.name}
+                  </Link>
+                )
+              )}
+            </div>
           )}
 
-          <div className="pt-4 flex items-center gap-4">
-            <button
-                className="text-black font-semibold border border-black px-4 py-1 rounded-full flex items-center gap-2"
+          {/* Bottom buttons */}
+          {!activeMenu && (
+            <div className="pt-6 flex flex-col gap-3">
+              <button
+                onClick={() => window.location.href = "https://admin.go-up-northstar.co.za/"}
+                className="w-full text-black font-semibold border border-black px-4 py-2 rounded-full flex items-center justify-center gap-2 hover:bg-gray-900 hover:text-white transition"
                 title="Login"
               >
                 <FiUser />
-                <span className="font-normal">Login</span>
+                <span>Login</span>
               </button>
-            <button className="border text-gray-600 px-4 py-1 rounded-full hover:text-blue-600 transition flex items-center gap-2">
-              Join Us
-              <FaUserPlus className="text-sm" />
-            </button>
-          </div>
+
+              <Link
+                to="/join-us"
+                onClick={onClose}
+                className="w-full border border-gray-900 text-gray-900 px-4 py-2 rounded-full hover:bg-amber-600 hover:text-white hover:border-amber-600 transition flex items-center justify-center gap-2 font-semibold"
+              >
+                <FaUserPlus className="text-base" />
+                Join Us
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>
