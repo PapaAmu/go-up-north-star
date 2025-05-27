@@ -18,6 +18,10 @@ const Navbar = () => {
   const handleDropdown = (name) =>
     setOpenDropdown(openDropdown === name ? null : name);
 
+  const handleLoginRedirect = () => {
+    window.location.href = "http://localhost:8003";
+  };
+
   const navLinks = [
     {
       name: "Personal",
@@ -86,6 +90,7 @@ const Navbar = () => {
               </button>
 
               <button
+                onClick={handleLoginRedirect}
                 className="group text-gray-900 hidden font-semibold border hover:scale-110 duration-500 border-gray-900 px-3 py-1 rounded-full md:flex items-center gap-2 text-sm transition hover:bg-amber-600 hover:border-amber-600 hover:text-white"
                 title="Login"
               >
