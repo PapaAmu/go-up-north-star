@@ -19,7 +19,7 @@ const Navbar = () => {
     setOpenDropdown(openDropdown === name ? null : name);
 
   const handleLoginRedirect = () => {
-    window.location.href = "http://localhost:8003";
+    window.location.href = "https://admin.go-up-northstar.co.za/";
   };
 
   const navLinks = [
