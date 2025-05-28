@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const ApplyAccountModal = ({ open, onClose }) => {
   const [form, setForm] = useState({
@@ -45,7 +46,7 @@ const ApplyAccountModal = ({ open, onClose }) => {
     e.preventDefault();
 
     if (!idCopy || !poa) {
-      alert("Both ID Copy and Proof of Address are required.");
+      toast.error("Both ID Copy and Proof of Address are required.");
       return;
     }
 
@@ -60,10 +61,11 @@ const ApplyAccountModal = ({ open, onClose }) => {
       await axios.post("http://localhost:8003/api/applications", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
+      toast.success("Application submitted successfully!");
       navigate("/application-success");
     } catch (error) {
       console.error("Submission failed", error);
-      alert("Submission failed. Please try again.");
+      toast.error("Submission failed. Please try again.");
     }
   };
 

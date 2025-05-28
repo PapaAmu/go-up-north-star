@@ -21,7 +21,7 @@ class ApplicationsResource extends Resource
 {
     protected static ?string $model = AccountApplication::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-user-plus';
     protected static ?string $navigationGroup = 'Customer Applications';
     protected static ?string $navigationLabel = 'Account Applications';
 
