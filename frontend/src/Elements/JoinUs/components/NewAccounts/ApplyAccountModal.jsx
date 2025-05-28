@@ -58,7 +58,7 @@ const ApplyAccountModal = ({ open, onClose }) => {
     formData.append("poa", poa);
 
     try {
-      await axios.post("http://localhost:8003/api/applications", formData, {
+      await axios.post("https://admin.go-up-northstar.co.za/api/applications", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       toast.success("Application submitted successfully!");

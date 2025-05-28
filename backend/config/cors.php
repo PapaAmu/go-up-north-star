@@ -19,7 +19,7 @@ return [
 
     'allowed_methods' => ['*'], // Allow all HTTP methods
 
-    'allowed_origins' => ['http://localhost:5000'], //  Only allow your frontend
+    'allowed_origins' => ['http://localhost:5000', 'https://go-up-northstar.co.za'], //  Only allow your frontend
 
     'allowed_origins_patterns' => [],
 

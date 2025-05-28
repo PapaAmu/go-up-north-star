@@ -4,10 +4,10 @@ FROM php:8.3-fpm
 RUN apt-get update && apt-get install -y \
     libpng-dev libjpeg-dev libfreetype6-dev zip unzip git \
     libicu-dev libxml2-dev default-mysql-client libzip-dev \
-    curl gnupg2 lsb-release ca-certificates \
+    curl gnupg2 lsb-release ca-certificates nano \
     && rm -rf /var/lib/apt/lists/*
 
-# Node.js LTS
+# Node.js LTS (if you use Vite, npm, etc.)
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs
 
@@ -20,17 +20,17 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 WORKDIR /var/www
 
+#  FIX: Correct copy statement
 COPY . .
 
-# Install PHP dependencies
+# Install PHP dependencies for production
 RUN composer install --no-dev --optimize-autoloader
 
-# Laravel setup steps (you could move these to an entrypoint script)
+# Laravel setup (optional in image build; can move to entrypoint)
 RUN php artisan key:generate \
     && php artisan config:cache \
     && php artisan route:cache
 
-EXPOSE 8003
+EXPOSE 8008
 
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8003"]
-
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8008"]
