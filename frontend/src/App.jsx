@@ -10,8 +10,9 @@ import ApplyBanner from "./Elements/ApplyBanner/ApplyBanner";
 import Loans from "./Elements/Loans/Loans";
 import Investors from "./Elements/Investors/Investors";
 import NewsAndUpdates from "./Elements/NewsAndUpdates/NewsAndUpdates";
-import "./App.css";
 import JoinUs from "./Elements/JoinUs/JoinUs";
+import SuccessPage from "./Elements/JoinUs/components/NewAccounts/SuccessPage";
+import "./App.css";
 
 function Home() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Route path="/investing" element={<Investors />} />
         <Route path="/news-and-updates" element={<NewsAndUpdates />} />
         <Route path="/join-us" element={<JoinUs />} />
+        <Route path="/application-success" element={<SuccessPage />} />
       </Routes>
       <Footer />
     </Router>

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import NewAccount from "./components/NewAccounts/NewAccount";
-import Membership from "./components/Membership";
+import Membership from "./components/Membership/Membership";
 import Loans from "./components/Borrowing";
 
 const JoinUs = () => {
