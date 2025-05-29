@@ -1,7 +1,7 @@
 import { useState } from "react";
 import NewAccount from "./components/NewAccounts/NewAccount";
 import Membership from "./components/Membership/Membership";
-import Loans from "./components/Borrowing";
+import Loans from "./components/Borrowing/Borrowing";
 
 const JoinUs = () => {
   const [activeTab, setActiveTab] = useState("account");

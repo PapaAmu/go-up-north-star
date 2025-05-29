@@ -58,9 +58,13 @@ const ApplyAccountModal = ({ open, onClose }) => {
     formData.append("poa", poa);
 
     try {
-      await axios.post("http://localhost:8003/api/applications", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      await axios.post(
+        `${import.meta.env.VITE_API_BASE_URL}/api/applications`,
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       toast.success("Application submitted successfully!");
       navigate("/application-success");
     } catch (error) {
