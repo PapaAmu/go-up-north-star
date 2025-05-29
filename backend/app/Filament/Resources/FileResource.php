@@ -13,12 +13,17 @@ use Filament\Tables;
 use Filament\Tables\Actions\DeleteAction;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Log;
+use App\Filament\Clusters\FileManager;
+
 
 class FileResource extends Resource
 {
     protected static ?string $model = File::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-paper-clip';
+    protected static ?string $cluster = FileManager::class;
+
+
 
     public static function form(Form $form): Form
     {

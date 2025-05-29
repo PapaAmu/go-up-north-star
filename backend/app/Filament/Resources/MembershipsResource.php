@@ -4,19 +4,32 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MembershipsResource\Pages;
 use App\Models\Membership;
-use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms;
+use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 
 class MembershipsResource extends Resource
 {
     protected static ?string $model = Membership::class;
+    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationGroup = 'Customer Applications';
+    protected static ?string $navigationLabel = 'Member Applications';
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $navigationGroup = 'Applications';
+    public static function getNavigationBadge(): ?string
+    {
+        $count = Membership::where('status', 'pending')->count();
+        return $count > 0 ? (string) $count : null;
+    }
+
+    public static function getNavigationBadgeColor(): string
+    {
+        $count = Membership::where('status', 'pending')->count();
+
+        return $count >= 5 ? 'danger' : 'warning';
+    }
 
     public static function form(Form $form): Form
     {
@@ -24,18 +37,14 @@ class MembershipsResource extends Resource
             Forms\Components\TextInput::make('first_name')
                 ->required()
                 ->maxLength(50),
-
             Forms\Components\TextInput::make('last_name')
                 ->required()
                 ->maxLength(50),
-
             Forms\Components\TextInput::make('email')
                 ->email()
                 ->required(),
-
             Forms\Components\TextInput::make('phone')
                 ->required(),
-
             Forms\Components\Radio::make('id_type')
                 ->options([
                     'ID' => 'South African ID',
@@ -43,28 +52,22 @@ class MembershipsResource extends Resource
                 ])
                 ->inline()
                 ->required(),
-
             Forms\Components\TextInput::make('id_number')
                 ->required(),
-
             Forms\Components\TextInput::make('shares')
                 ->numeric()
                 ->required()
                 ->minValue(10),
-
             Forms\Components\FileUpload::make('proof_of_payment_path')
                 ->label('Proof of Payment')
                 ->directory('membership-proof')
                 ->downloadable()
                 ->previewable()
                 ->preserveFilenames(),
-
             Forms\Components\Toggle::make('accepted_terms')
                 ->label('Accepted Terms & Conditions'),
-
             Forms\Components\Toggle::make('read_terms')
                 ->label('Read Terms & Conditions'),
-
             Forms\Components\Select::make('status')
                 ->options([
                     'pending' => 'Pending',

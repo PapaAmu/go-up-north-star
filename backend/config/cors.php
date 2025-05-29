@@ -17,18 +17,18 @@ return [
 
    'paths' => ['api/*', 'sanctum/csrf-cookie'],
 
-    'allowed_methods' => ['*'], // Allow all HTTP methods
+   'allowed_methods' => ['*'], // Allow all HTTP methods
 
-    'allowed_origins' => ['http://localhost:5000', 'https://go-up-northstar.co.za], //  Only allow your frontend
+   'allowed_origins' => ['http://localhost:5000', 'https://go-up-northstar.co.za'], //  Only allow your frontend
 
-    'allowed_origins_patterns' => [],
+   'allowed_origins_patterns' => [],
 
-    'allowed_headers' => ['*'],
+   'allowed_headers' => ['*'],
 
-    'exposed_headers' => [],
+   'exposed_headers' => [],
 
-    'max_age' => 0,
+   'max_age' => 0,
 
-    'supports_credentials' => false,
+   'supports_credentials' => false,
 
 ];
