@@ -65,6 +65,7 @@ const ApplyAccountModal = ({ open, onClose }) => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+
       toast.success("Application submitted successfully!");
       navigate("/application-success");
     } catch (error) {
