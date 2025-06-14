@@ -21,7 +21,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8003:8003"
+      - "8008:8008"
     volumes:
       - ./backend:/var/www
     depends_on:

@@ -1,21 +1,15 @@
 import { useState } from "react";
-import NewAccount from "./components/NewAccounts/NewAccount";
 import Membership from "./components/Membership/Membership";
-import Loans from "./components/Borrowing/Borrowing";
 
 const JoinUs = () => {
-  const [activeTab, setActiveTab] = useState("account");
+  const [activeTab, setActiveTab] = useState("membership");
 
   const renderTab = () => {
     switch (activeTab) {
-      case "account":
-        return <NewAccount />;
       case "membership":
         return <Membership />;
-      case "loans":
-        return <Loans />;
       default:
-        return <NewAccount />;
+        return <Membership />;
     }
   };
 
@@ -39,17 +33,6 @@ const JoinUs = () => {
         {/* Tab Buttons */}
         <div className="flex justify-center mb-10 flex-wrap">
           <button
-            onClick={() => setActiveTab("account")}
-            className={`px-5 py-2.5 text-sm font-semibold shadow-xl transition duration-500 ${
-              activeTab === "account"
-                ? "bg-amber-600 text-white scale-125"
-                : "bg-white border border-amber-500 text-gray-800 hover:bg-amber-50"
-            }`}
-          >
-            Open Account
-          </button>
-
-          <button
             onClick={() => setActiveTab("membership")}
             className={`px-5 py-2.5 text-sm font-semibold shadow-xl transition duration-500 ${
               activeTab === "membership"
@@ -58,17 +41,6 @@ const JoinUs = () => {
             }`}
           >
             Membership
-          </button>
-
-          <button
-            onClick={() => setActiveTab("loans")}
-            className={`px-5 py-2.5 text-sm font-semibold shadow-xl transition duration-500 ${
-              activeTab === "loans"
-                ? "bg-amber-600 text-white scale-125"
-                : "bg-white border border-amber-500 text-gray-800 hover:bg-amber-50"
-            }`}
-          >
-            Borrowing
           </button>
         </div>
 
