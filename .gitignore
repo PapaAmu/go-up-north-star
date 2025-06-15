@@ -17,10 +17,11 @@ dist-ssr
 # Local env files
 *.local
 
-# Ignore Dockerfiles inside frontend/ and backend/
+# Ignore Docker files in frontend/ and backend/
 frontend/Dockerfile
 backend/Dockerfile
-Dockerfile
+
+# Ignore docker-compose file at root
 docker-compose.yml
 
 # Editor directories and files

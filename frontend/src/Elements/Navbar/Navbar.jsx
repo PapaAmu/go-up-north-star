@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { useLocation, Link } from "react-router-dom"; // ✅ Add Link
 import { FaUserPlus } from "react-icons/fa";
-import { GoSearch } from "react-icons/go";
-import { IoGridSharp, IoGridOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
-import SearchOverlay from "./SearchOverlay";
+import { GoSearch } from "react-icons/go";
+import { IoGridOutline, IoGridSharp } from "react-icons/io5";
+import { Link, useLocation } from "react-router-dom"; // ✅ Add Link
 import MobileMenu from "./MobileMenu";
 import NavDropdown from "./NavDropdown";
+import SearchOverlay from "./SearchOverlay";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,12 +40,12 @@ const Navbar = () => {
   ];
 
   return (
-    <div className="py-2">
+    <div className="">
       <nav className="bg-white sticky top-0 z-50">
         {showSearch && <SearchOverlay onClose={() => setShowSearch(false)} />}
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
-          <div className="flex border-b border-gray-300 justify-between items-center h-16">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6 border-b border-gray-200 py-2">
+          <div className="flex  justify-between items-center h-16">
             {/* Logo */}
             <a href="/" className="flex items-center space-x-2">
               <img
