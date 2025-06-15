@@ -1,16 +1,12 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const Step3PersonalInformation = ({
-  onConfirm,
-  setFirstName,
-  setLastName,
   setPhone,
   setEmail,
   setIdType,
   setIdNumber,
-  setProofOfPayment,
-  setIdDocument,
+  setStep3Valid,
 }) => {
   const [gender, setGender] = useState("");
   const [idType, setLocalIdType] = useState("ID");
@@ -19,14 +15,19 @@ const Step3PersonalInformation = ({
   const [email, setLocalEmail] = useState("");
   const [profession, setProfession] = useState("");
   const [occupation, setOccupation] = useState("");
-  const [qualification, setQualification] = useState("");
-  const [physicalAddress, setPhysicalAddress] = useState("");
-  const [postalAddress, setPostalAddress] = useState("");
-  const [inviterName, setInviterName] = useState("");
 
-  const [proofOfPayment, setLocalProofOfPayment] = useState(null);
-  const [idDocument, setLocalIdDocument] = useState(null);
-  const [acceptPopi, setAcceptPopi] = useState(false);
+  const handleFormChange = () => {
+    const isFormValid = Boolean(
+      gender &&
+      idNumber &&
+      phone &&
+      email &&
+      profession &&
+      occupation
+    );
+
+    setStep3Valid(isFormValid);
+  };
 
   const handleSubmit = () => {
     if (
@@ -35,15 +36,9 @@ const Step3PersonalInformation = ({
       !phone ||
       !email ||
       !profession ||
-      !occupation ||
-      !qualification ||
-      !physicalAddress ||
-      !postalAddress ||
-      !inviterName ||
-      !idDocument ||
-      !acceptPopi
+      !occupation
     ) {
-      toast.error("Please complete all fields and upload your ID document.");
+      toast.error("Please complete all fields.");
       return;
     }
 
@@ -56,16 +51,13 @@ const Step3PersonalInformation = ({
     setIdNumber(idNumber);
     setPhone(phone);
     setEmail(email);
-    setProofOfPayment(proofOfPayment);
-    setIdDocument(idDocument);
-    onConfirm();
   };
 
   return (
     <div className="space-y-6 text-sm text-gray-800">
       <h2 className="text-2xl font-bold text-amber-700">Personal Information</h2>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onChange={handleFormChange}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="font-medium">Gender</label>
@@ -148,120 +140,7 @@ const Step3PersonalInformation = ({
             />
           </div>
         </div>
-
-        <div>
-          <label className="font-medium">Highest Qualification</label>
-          <input
-            type="text"
-            value={qualification}
-            onChange={(e) => setQualification(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
-          />
-        </div>
-
-        <div>
-          <label className="font-medium">Physical Address</label>
-          <textarea
-            rows={2}
-            value={physicalAddress}
-            onChange={(e) => setPhysicalAddress(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
-          />
-        </div>
-
-        <div>
-          <label className="font-medium">Postal Address</label>
-          <textarea
-            rows={2}
-            value={postalAddress}
-            onChange={(e) => setPostalAddress(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
-          />
-        </div>
-
-        <div>
-          <label className="font-medium">
-            Name & Surname of Person Who Invited You
-          </label>
-          <input
-            type="text"
-            value={inviterName}
-            onChange={(e) => setInviterName(e.target.value)}
-            className="w-full border rounded-md px-3 py-2"
-          />
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="font-medium">Upload ID Document (Required)</label>
-            <input
-              type="file"
-              accept="image/*,.pdf"
-              onChange={(e) => setLocalIdDocument(e.target.files[0])}
-              className="w-full text-sm"
-            />
-          </div>
-
-          <div>
-            <label className="font-medium">Proof of Payment (Optional)</label>
-            <input
-              type="file"
-              accept="image/*,.pdf"
-              onChange={(e) => setLocalProofOfPayment(e.target.files[0])}
-              className="w-full text-sm"
-            />
-          </div>
-        </div>
-
-        <div className="pt-4">
-          <label className="flex items-start gap-2 text-sm">
-            <input
-              type="checkbox"
-              checked={acceptPopi}
-              onChange={() => setAcceptPopi(!acceptPopi)}
-              className="accent-amber-600 mt-1"
-            />
-            <span>
-              I consent to the collection and use of my personal information in
-              accordance with the{" "}
-              <a
-                href="https://popia.co.za"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-amber-600 underline"
-              >
-                Protection of Personal Information Act (POPIA)
-              </a>
-              .
-            </span>
-          </label>
-        </div>
       </form>
-
-      <div className="flex justify-end mt-6">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className={`px-6 py-2 text-sm rounded-full font-medium shadow ${
-            gender &&
-            idNumber &&
-            phone &&
-            email &&
-            profession &&
-            occupation &&
-            qualification &&
-            physicalAddress &&
-            postalAddress &&
-            inviterName &&
-            idDocument &&
-            acceptPopi
-              ? "bg-amber-600 hover:bg-amber-700 text-white"
-              : "bg-gray-400 text-white cursor-not-allowed"
-          }`}
-        >
-          Next
-        </button>
-      </div>
     </div>
   );
 };

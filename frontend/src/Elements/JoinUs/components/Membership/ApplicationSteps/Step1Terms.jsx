@@ -1,26 +1,28 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-const Step1TermsAndConditions = ({ onConfirm, setFirstName, setLastName }) => {
+const Step1TermsAndConditions = ({ setFirstName, setLastName }) => {
   const [firstName, setLocalFirstName] = useState("");
   const [lastName, setLocalLastName] = useState("");
   const [understood, setUnderstood] = useState(false);
   const [accepted, setAccepted] = useState(false);
 
-  const handleNext = () => {
-    if (!firstName.trim() || !lastName.trim()) {
-      toast.error("Please enter both your first name and last name.");
-      return;
-    }
-
-    if (!understood || !accepted) {
-      toast.error("You must read, understand, and accept the terms to continue.");
-      return;
-    }
-
+  useEffect(() => {
     setFirstName(firstName.trim());
     setLastName(lastName.trim());
-    onConfirm();
+  }, [firstName, lastName, setFirstName, setLastName]);
+
+  // Expose validation method (to be triggered externally)
+  Step1TermsAndConditions.isStepValid = () => {
+    if (!firstName.trim() || !lastName.trim()) {
+      toast.error("Please enter both your first name and last name.");
+      return false;
+    }
+    if (!understood || !accepted) {
+      toast.error("You must read, understand, and accept the terms to continue.");
+      return false;
+    }
+    return true;
   };
 
   return (
@@ -28,14 +30,14 @@ const Step1TermsAndConditions = ({ onConfirm, setFirstName, setLastName }) => {
       <h2 className="text-2xl font-bold text-amber-700">Welcome to the Membership Application</h2>
 
       <p>
-        Thank you for your interest in becoming a shareholder of the <strong>New Coop Bank</strong>.
-        Please begin by confirming your identity and understanding the basic terms of membership.
+        Thank you for your interest in becoming a shareholder of the <strong>GO UP NORTHSTAR Co-operative</strong>.
+        Please begin by confirming your names and surname as per your ID/Passport and understanding the basic terms of membership application.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label htmlFor="firstName" className="block font-medium">
-            First Name <span className="text-xs text-gray-500">(as per ID or Passport)</span>
+            First Names <span className="text-xs text-gray-500">(as per ID or Passport)</span>
           </label>
           <input
             type="text"
@@ -71,8 +73,8 @@ const Step1TermsAndConditions = ({ onConfirm, setFirstName, setLastName }) => {
           <li>Monthly non-refundable admin fee: <strong>R50.00</strong></li>
           <li>There is no limit on how much you can save monthly.</li>
         </ul>
-        <p className="text-xs text-gray-600">
-          These contributions support the sustainability and operations of the New Coop Bank and its registered Savings Co-operative.
+        <p className="text-xs text-amber-600">
+          These contributions support the sustainability and operations of the GO UP NORTHSTAR and its registered Savings Co-operative.
         </p>
       </div>
 
@@ -85,7 +87,7 @@ const Step1TermsAndConditions = ({ onConfirm, setFirstName, setLastName }) => {
             className="mt-1 accent-amber-600"
           />
           <label>
-            I confirm that I have read and understood the{' '}
+            I confirm that I have read and understood the{" "}
             <a
               href="https://example.com/terms"
               target="_blank"
@@ -108,19 +110,6 @@ const Step1TermsAndConditions = ({ onConfirm, setFirstName, setLastName }) => {
             I accept the terms and conditions and wish to proceed with my application.
           </label>
         </div>
-      </div>
-
-      <div className="flex justify-end">
-        <button
-          onClick={handleNext}
-          className={`px-6 py-2 rounded-full text-white font-medium shadow ${
-            firstName && lastName && understood && accepted
-              ? "bg-amber-600 hover:bg-amber-700"
-              : "bg-gray-400 cursor-not-allowed"
-          }`}
-        >
-          Next
-        </button>
       </div>
     </div>
   );

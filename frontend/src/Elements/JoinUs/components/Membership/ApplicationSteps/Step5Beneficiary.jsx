@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 const Step4BeneficiaryDetails = ({
-  onConfirm,
   setBeneficiaryFirstName,
   setBeneficiaryLastName,
   setBeneficiaryIdNumber,
   setBeneficiaryRelationship,
   setBeneficiaryPhone,
   setBeneficiaryEmail,
+  setStep4Valid,
 }) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -16,6 +16,19 @@ const Step4BeneficiaryDetails = ({
   const [relationship, setRelationship] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+
+  const handleFormChange = () => {
+    const isFormValid = Boolean(
+      firstName &&
+      lastName &&
+      idNumber &&
+      relationship &&
+      phone &&
+      email
+    );
+
+    setStep4Valid(isFormValid);
+  };
 
   const handleSubmit = () => {
     if (!firstName || !lastName || !idNumber || !relationship || !phone || !email) {
@@ -30,15 +43,13 @@ const Step4BeneficiaryDetails = ({
     setBeneficiaryRelationship(relationship);
     setBeneficiaryPhone(phone);
     setBeneficiaryEmail(email);
-
-    onConfirm();
   };
 
   return (
     <div className="space-y-6 text-sm text-gray-800">
       <h2 className="text-2xl font-bold text-amber-700">Beneficiary Details</h2>
 
-      <form className="space-y-4">
+      <form className="space-y-4" onChange={handleFormChange}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="font-medium">First Name</label>
@@ -109,20 +120,6 @@ const Step4BeneficiaryDetails = ({
           </div>
         </div>
       </form>
-
-      <div className="flex justify-end mt-6">
-        <button
-          type="button"
-          onClick={handleSubmit}
-          className={`px-6 py-2 text-sm rounded-full font-medium shadow ${
-            firstName && lastName && idNumber && relationship && phone && email
-              ? "bg-amber-600 hover:bg-amber-700 text-white"
-              : "bg-gray-400 text-white cursor-not-allowed"
-          }`}
-        >
-          Submit Application
-        </button>
-      </div>
     </div>
   );
 };
