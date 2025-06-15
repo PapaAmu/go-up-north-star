@@ -11,23 +11,23 @@ import "./HeroSection.css";
 
 const cards = [
   {
-    title: "Savings Solutions",
+    title: "Smart Saving Habits",
     content:
-      "Manage your money with smarter tools that help you track spending, set goals, and save effortlessly.",
+      "Build towards your goals with structured saving plans and community-backed tools that encourage growth and discipline.",
     bgColor: "bg-amber-400",
     sideImage: card1,
   },
   {
-    title: "Group Lending",
+    title: "Collective Wealth",
     content:
-      "Streamline payments, payroll, and team expenses with a secure, all-in-one business banking solution.",
+      "Pool resources with others to invest in meaningful projects and share in the collective financial progress of our members.",
     bgColor: "bg-amber-600",
     sideImage: card2,
   },
   {
-    title: "Membership",
+    title: "Membership Value",
     content:
-      "Grow your wealth with intelligent insights, real-time tracking, and tailored investment options.",
+      "Join a people-driven co-operative that rewards participation and offers opportunities to earn based on performance and involvement.",
     bgColor: "bg-amber-800",
     sideImage: card3,
   },
@@ -60,7 +60,7 @@ const HeroSection = () => {
         <title>WELCOME | Go Up North Star</title>
         <meta
           name="description"
-          content="Discover inclusive banking designed for our community."
+          content="Join a people-powered financial movement and grow your wealth through shared investment opportunities."
         />
       </Helmet>
       <section className="bg-white py-10">
@@ -93,7 +93,7 @@ const HeroSection = () => {
                   />
                 </svg>
               </span>{" "}
-              of financing on your terms
+              of community-driven finance
             </h1>
           </div>
 
@@ -105,15 +105,25 @@ const HeroSection = () => {
             className="flex flex-col items-center text-center gap-4"
           >
             <p className="text-gray-600 text-sm max-w-sm">
-              A new era of inclusive banking for our people
+              A new era of shared wealth and collective empowerment
             </p>
 
-            <button className="inline-flex items-center gap-2 bg-gray-900 text-white px-3 py-2 rounded-full text-sm font-medium hover:bg-gray-800 transition">
-              Get Started
-              <span className="bg-amber-500 p-2 rounded-full">
-                <FaArrowRight className="w-4 h-4 text-black" />
-              </span>
-            </button>
+            <button
+  onClick={() => {
+    const section = document.getElementById("banking");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  }}
+  className="inline-flex items-center gap-2 bg-gray-900 text-white px-3 py-2 rounded-full shadow-md text-sm font-medium duration-500 hover:bg-lime-400 transition"
+>
+  Get Started
+  <span className="bg-amber-500 p-2 rounded-full">
+    <FaArrowRight className="w-4 h-4 text-black" />
+  </span>
+</button>
+
+
           </motion.div>
         </motion.div>
 
@@ -155,7 +165,7 @@ const HeroSection = () => {
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.5 }}
-                        className="relative z-10 flex flex-grow gap-4 min-h-[250px]"
+                        className="relative z-10 flex flex-grow gap-4 min-h-[260px]"
                       >
                         <div className="w-2/3 flex flex-col p-4 justify-between">
                           <h3 className="text-3xl font-semibold text-white mb-2">
@@ -170,14 +180,14 @@ const HeroSection = () => {
                                 <FiPieChart className="text-green-600 w-14 h-5" />
                               }
                               title="Smart Budgeting"
-                              desc="Set budgets, automate savings, reach your goals faster."
+                              desc="Set targets, stay accountable, and build your wealth with the group."
                             />
                             <FeatureCard
                               icon={
                                 <FiShield className="text-green-600 w-14 h-5" />
                               }
-                              title="Real-Time Control"
-                              desc="Track transactions, manage access, stay in control."
+                              title="Transparent Oversight"
+                              desc="Follow your contributions and returns in real time."
                             />
                           </div>
                         </div>
@@ -206,7 +216,7 @@ const HeroSection = () => {
                         e.stopPropagation();
                         handleNext();
                       }}
-                      className="absolute border-8 -bottom-1 -right-1 z-10 bg-black text-white p-3 rounded-full hover:bg-opacity-90 transition"
+                      className="absolute border-8 -bottom-1 -right-1 z-10 bg-black hover:bg-lime-400 text-white p-3 rounded-full hover:bg-opacity-90 transition"
                     >
                       <FaArrowRight className="w-4 h-4" />
                     </button>
@@ -247,19 +257,19 @@ const HeroSection = () => {
                 <FeatureCard
                   icon={<FiPieChart className="text-green-600 w-14 h-5" />}
                   title="Smart Budgeting"
-                  desc="Set budgets, automate savings, reach your goals faster."
+                  desc="Set targets, stay accountable, and build your wealth with the group."
                 />
                 <FeatureCard
                   icon={<FiShield className="text-green-600 w-14 h-5" />}
-                  title="Real-Time Control"
-                  desc="Track transactions, manage access, stay in control."
+                  title="Transparent Oversight"
+                  desc="Follow your contributions and returns in real time."
                 />
               </div>
 
               {/* Next button */}
               <button
                 onClick={handleNext}
-                className="self-end mt-4 bg-black text-white p-3 rounded-full hover:bg-opacity-90 transition"
+                className="self-end mt-4 hover:bg-lime-400 bg-black text-white p-3 rounded-full hover:bg-opacity-90 transition"
               >
                 <FaArrowRight className="w-4 h-4" />
               </button>

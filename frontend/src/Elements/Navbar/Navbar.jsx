@@ -23,17 +23,19 @@ const Navbar = () => {
   };
 
   const navLinks = [
-    {
-      name: "Personal",
-      dropdown: ["Savings", "Accounts", "Mobile Banking"],
-    },
-    {
-      name: "Business",
-      dropdown: ["SME Services", "Business Loans", "Merchant Tools"],
-    },
+    // {
+    //   name: "Personal",
+    //   dropdown: ["Savings", "Accounts", "Mobile Banking"],
+    // },
+    // {
+    //   name: "Business",
+    //   dropdown: ["SME Services", "Business Loans", "Merchant Tools"],
+    // },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about-us" },
     { name: "Talk to us", href: "/talk-to-us" },
-    { name: "Loans", href: "/money-loan" },
-    { name: "Investors", href: "/investing" },
+    // { name: "Loans", href: "/money-loan" },
+    { name: "Membership", href: "/join-membership" },
     { name: "News & Updates", href: "/news-and-updates" },
   ];
 
@@ -100,7 +102,7 @@ const Navbar = () => {
 
               {/* "Join Us" Button as Link */}
               <Link
-                to="/join-us"
+                to="/membership/join-us"
                 className="group hidden md:flex items-center gap-2 text-sm hover:scale-110 border border-gray-900 text-gray-900 px-2 py-1 rounded-full transition duration-500 hover:bg-amber-600 hover:text-white hover:border-amber-600"
               >
                 <FaUserPlus className="text-white bg-gray-900 p-1 hover:bg-white hover:text-gray-900 text-xl rounded-full transition-transform duration-300 group-hover:scale-105" />

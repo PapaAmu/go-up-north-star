@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet-async";
 
 const departments = [
   {
-    title: "Customer Service",
+    title: "Member Support",
     phone1: "011 123 4567",
     email: "support@go-up-northstar.co.za",
     hours: [
@@ -14,9 +14,9 @@ const departments = [
     ],
   },
   {
-    title: "Account Queries",
+    title: "Savings Programs",
     phone1: "011 123 4567",
-    email: "accounts@go-up-northstar.co.za",
+    email: "savings@go-up-northstar.co.za",
     hours: [
       "Monday–Friday: 7:00 to 19:00",
       "Saturday: 8:00 to 16:00",
@@ -24,51 +24,32 @@ const departments = [
     ],
   },
   {
-    title: "Loan Applications",
+    title: "Contribution & Shareholding",
     phone1: "011 123 4567",
-    email: "loans@go-up-northstar.co.za",
+    email: "shares@go-up-northstar.co.za",
     extras: [
-      "Apply now",
-      "Upload documents",
-      "Track application: 0861 987 654",
+      "Submit share purchase request",
+      "Upload supporting documents",
+      "Track status: 0861 987 654",
     ],
   },
   {
-    title: "Investments",
+    title: "Community Growth Initiatives",
     phone1: "011 123 4567",
-    email: "investments@go-up-northstar.co.za",
+    email: "community@go-up-northstar.co.za",
   },
   {
-    title: "Insurance",
+    title: "Protection & Funeral Plans",
     phone1: "011 123 4567",
-    email: "insurance@go-up-northstar.co.za",
+    email: "cover@go-up-northstar.co.za",
     hours: ["Monday–Friday: 8:00 – 17:00"],
   },
   {
-    title: "Card Support",
+    title: "Membership Applications",
     phone1: "011 123 4567",
-    email: "cards@go-up-northstar.co.za",
+    email: "membership@go-up-northstar.co.za",
     hours: ["Monday–Friday: 8:00 to 19:00", "Weekend closed"],
   },
-  //   {
-  //     title: "Document Upload",
-  //     extras: ["You can upload documents via WhatsApp."],
-  //     whatsapp: "011 123 4567",
-  //   },
-  //   {
-  //     title: "Debt Counselling",
-  //     phone1: "011 123 4567",
-  //     email: "debt@go-up-northstar.co.za",
-  //     hours: ["Monday–Friday: 9:00 – 17:00"],
-  //   },
-  //   {
-  //     title: "Lost or Stolen Cards",
-  //     extras: [
-  //       "Stop card Tel: 011 123 4567",
-  //       "SA Tel: 011 123 4567",
-  //       "Activation Tel: 011 123 4567",
-  //     ],
-  //   },
 ];
 
 const ContactInfo = () => {
@@ -78,7 +59,7 @@ const ContactInfo = () => {
         <title>CONTACT INFO | Go Up North Star</title>
         <meta
           name="description"
-          content="Discover inclusive banking designed for our community."
+          content="Reach out to our support teams for savings, membership, and community services."
         />
       </Helmet>
       <section className="bg-gradient-to-b from-amber-300 to-amber-900 py-10 px-4 md:px-16">

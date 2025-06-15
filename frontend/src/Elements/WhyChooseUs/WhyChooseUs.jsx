@@ -41,7 +41,7 @@ const WhyChooseUs = () => {
   const inView = useInView(ref, { once: true, amount: 0.2 });
 
   return (
-    <section className="py-20 bg-white px-4">
+    <section className="py-28 bg-white px-4">
       <div className="container mx-auto max-w-7xl">
         {/* Image Section */}
         <motion.div

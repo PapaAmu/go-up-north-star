@@ -115,7 +115,7 @@ const MobileMenu = ({
               </button>
 
               <Link
-                to="/join-us"
+                to="/membership/join-us"
                 onClick={onClose}
                 className="w-full border border-gray-900 text-gray-900 px-4 py-2 rounded-full hover:bg-amber-600 hover:text-white hover:border-amber-600 transition flex items-center justify-center gap-2 font-semibold"
               >

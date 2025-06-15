@@ -80,17 +80,17 @@ const Footer = () => {
                 </li>
                 <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
-                    About
+                    About Us
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
-                    Services
+                    Our Services
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
-                    Contact
+                    Contact Us
                   </a>
                 </li>
               </ul>
@@ -103,25 +103,25 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <a href="#" className="hover:text-amber-500 hover:underline">
-                    Personal Account
+                  <a href="/membership" className="hover:text-amber-500 hover:underline">
+                    Membership
                   </a>
                 </li>
                 <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
-                    Business Solutions
+                    Saving Solutions
                   </a>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
-                    Investing
+                    Policies & Procedures
                   </a>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
                     Loans
                   </a>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -131,11 +131,11 @@ const Footer = () => {
                 Company
               </h3>
               <ul className="space-y-2 text-sm">
-                <li>
+                {/* <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
                     About
                   </a>
-                </li>
+                </li> */}
                 <li>
                   <a href="#" className="hover:text-amber-500 hover:underline">
                     Privacy Policy

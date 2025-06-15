@@ -1,5 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
+
 
 const fadeUp = {
   hidden: { opacity: 0, y: 40 },
@@ -17,7 +19,7 @@ const ApplyBanner = () => {
   const inView = useInView(ref, { once: true, amount: 0.4 });
 
   return (
-    <div className="container px-4">
+    <div className="container px- py-20">
       <section className="relative flex justify-center items-center py-16 sm:py-20">
         <motion.div
           ref={ref}
@@ -35,18 +37,19 @@ const ApplyBanner = () => {
           {/* Foreground content */}
           <div className="relative z-10">
             <h2 className="text-3xl md:text-5xl font-semibold mb-4">
-              Simplify payments
+              Be a part of
               <br className=" sm:block" />
-              management
+              GoUp NorthStar
             </h2>
             <p className="text-sm sm:text-base text-purple-100 mb-6 max-w-md mx-auto">
-              Easy and fast personal and business account that saves you money
-              wherever you want to use it.
+              Join a movement that empowers communities and builds financial freedom — start your journey today
             </p>
 
-            <button className="bg-white text-amber-700 hover:scale-110 duration-500 font-semibold px-6 py-2 rounded-full shadow hover:bg-purple-100 transition">
-              Apply Now
-            </button>
+            <Link to="/join-membership">
+  <button className="bg-white text-amber-700 hover:scale-110 duration-500 font-semibold px-6 py-2 rounded-full shadow hover:bg-purple-100 transition">
+    Become A Member Now
+  </button>
+</Link>
           </div>
         </motion.div>
       </section>

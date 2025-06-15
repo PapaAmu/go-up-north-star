@@ -1,7 +1,7 @@
 import {
-  FaCreditCard,
   FaPiggyBank,
-  FaHandHoldingUsd,
+  FaChartLine,
+  FaUsers,
   FaWallet,
 } from "react-icons/fa";
 import { BsArrowUpRight } from "react-icons/bs";
@@ -11,19 +11,19 @@ import { useRef } from "react";
 const services = [
   {
     icon: <FaPiggyBank className="text-white text-2xl" />,
-    title: "Savings Solutions",
+    title: "Flexible Savings Plans",
   },
   {
-    icon: <FaCreditCard className="text-white text-2xl" />,
-    title: "Mobile Payments",
+    icon: <FaChartLine className="text-white text-2xl" />,
+    title: "Community Investment Pools",
   },
   {
-    icon: <FaHandHoldingUsd className="text-white text-2xl" />,
-    title: "Group Lending",
+    icon: <FaUsers className="text-white text-2xl" />,
+    title: "Group Contributions & Payouts",
   },
   {
     icon: <FaWallet className="text-white text-2xl" />,
-    title: "Wealth Management",
+    title: "Growth & Profit Sharing",
   },
 ];
 
@@ -44,7 +44,7 @@ const BankingServices = () => {
   const inView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
-    <div className="container py-12">
+    <div className="container" >
       <section
         ref={sectionRef}
         className="bg-gradient-to-r from-white to-[#e7f5ed] p-6 rounded-3xl"
@@ -57,12 +57,11 @@ const BankingServices = () => {
             animate={inView ? "visible" : "hidden"}
             className="space-y-6 px-4 md:px-0"
           >
-            <h2 className="text-2xl md:text-4xl font-semibold text-gray-900">
-              Browse our set of <br /> financial services and offerings
+            <h2 className="text-2xl md:text-4xl text-gray-900">
+              Explore our <br /> community financial offerings
             </h2>
             <p className="text-gray-600 text-sm max-w-md">
-              We offer a variety of tools and resources to help you manage your
-              finances more effectively.
+              Discover simple ways to save, grow your money, and participate in shared wealth through trusted community-led initiatives.
             </p>
             <div className="flex justify-center md:justify-start">
               <button className="inline-flex items-center gap-2 bg-gray-950 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-lime-400 transition">

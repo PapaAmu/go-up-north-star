@@ -48,7 +48,6 @@ class AdminPanelProvider extends PanelProvider
             // Explicitly register Resources
             ->resources([
                 ApplicationsResource::class,
-                FileResource::class,
                 MembershipsResource::class,
                 UserResource::class,
             ])

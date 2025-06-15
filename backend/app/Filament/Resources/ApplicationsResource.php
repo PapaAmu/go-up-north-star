@@ -20,9 +20,8 @@ use Illuminate\Support\Carbon;
 class ApplicationsResource extends Resource
 {
     protected static ?string $model = AccountApplication::class;
-     protected static ?string $navigationIcon = 'heroicon-o-user-plus';
-    protected static ?string $navigationGroup = 'Customer Applications';
-    protected static ?string $navigationLabel = 'Account Applications';
+    protected static ?string $navigationIcon = 'heroicon-o-user-plus';
+    
 
      public static function getNavigationBadge(): ?string
     {

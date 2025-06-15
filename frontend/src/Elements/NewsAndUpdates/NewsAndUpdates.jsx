@@ -6,28 +6,28 @@ const newsUpdates = [
     title: "Go Up North Star Launches New Mobile App",
     date: "May 15, 2025",
     summary:
-      "Our new mobile app brings banking closer to you. Enjoy seamless transfers, instant balance checks, and secure login with biometrics.",
+      "Our new mobile app brings co-operative services closer to you. Enjoy secure member access, savings updates, and digital convenience.",
     link: "/news/mobile-app-launch",
   },
   {
-    title: "Record Growth in Member Investments",
+    title: "Strong Growth in Member Contributions",
     date: "April 22, 2025",
     summary:
-      "We're proud to report a 35% year-over-year increase in member investments. Thank you for believing in our shared vision.",
-    link: "/news/investment-growth",
+      "We're proud to report a 35% year-over-year increase in member contributions. Your trust strengthens our shared co-operative future.",
+    link: "/news/contribution-growth",
   },
   {
     title: "Community Upliftment Drive – Phase 2 Begins",
     date: "March 30, 2025",
     summary:
-      "Phase 2 of our initiative will focus on skills development and financial literacy programs in underserved areas.",
+      "Phase 2 of our community program focuses on empowering local youth with financial literacy and entrepreneurial skills.",
     link: "/news/community-drive-phase2",
   },
   {
-    title: "Go Up North Star Wins Ethical Banking Award",
+    title: "Go Up North Star Wins Community Ethics Award",
     date: "February 12, 2025",
     summary:
-      "We're honored to be recognized for our commitment to transparency, sustainability, and community-centered banking.",
+      "We’re honored to be recognized for our commitment to fairness, transparency, and putting our members first.",
     link: "/news/ethics-award",
   },
 ];
@@ -39,20 +39,19 @@ const NewsAndUpdates = () => {
         <title>NEWS & UPDATES | Go Up North Star</title>
         <meta
           name="description"
-          content="Stay up to date with the latest news, initiatives, and achievements from Go Up North Star."
+          content="Get the latest news, community updates, and progress highlights from Go Up North Star Co-operative."
         />
       </Helmet>
 
       <section className="bg-white px-4 py-12 md:px-20 text-gray-900">
         <div className="max-w-6xl mx-auto">
-
           {/* Page Heading */}
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-amber-800">
               News & Updates
             </h1>
             <p className="text-gray-600 mt-3 max-w-2xl mx-auto">
-              Stay informed with the latest announcements, events, and stories from the Go Up North Star family.
+              Stay informed about our latest initiatives, achievements, and how we’re growing together as a co-operative family.
             </p>
           </div>
 
@@ -66,7 +65,7 @@ const NewsAndUpdates = () => {
             </p>
             <p className="text-sm text-gray-600">May 15, 2025</p>
             <p className="mt-2 text-gray-700">
-              Enjoy faster, smarter banking from anywhere. Download our new app from the App Store or Google Play.
+              Access your savings, track contributions, and stay connected from anywhere. Download our new app on the App Store or Google Play.
             </p>
           </div>
 
@@ -98,7 +97,7 @@ const NewsAndUpdates = () => {
           <div className="text-center mt-16">
             <h2 className="text-2xl font-semibold mb-2">Subscribe for Updates</h2>
             <p className="text-gray-600 mb-4">
-              Get news and insights delivered straight to your inbox.
+              Be the first to know about co-op developments and community milestones.
             </p>
             <form className="flex flex-col sm:flex-row justify-center items-center gap-2 max-w-xl mx-auto">
               <input

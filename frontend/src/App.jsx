@@ -34,9 +34,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/talk-to-us" element={<ContactInfo />} />
         <Route path="/money-loan" element={<Loans />} />
-        <Route path="/investing" element={<Investors />} />
+        <Route path="/join-membership" element={<Investors />} />
         <Route path="/news-and-updates" element={<NewsAndUpdates />} />
-        <Route path="/join-us" element={<JoinUs />} />
+        <Route path="/membership/join-us" element={<JoinUs />} />
         <Route path="/application-success" element={<SuccessPage />} />
       </Routes>
       <Footer />

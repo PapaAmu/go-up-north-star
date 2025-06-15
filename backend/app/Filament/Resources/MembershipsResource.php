@@ -15,8 +15,7 @@ class MembershipsResource extends Resource
 {
     protected static ?string $model = Membership::class;
     protected static ?string $navigationIcon = 'heroicon-o-user-group';
-    protected static ?string $navigationGroup = 'Customer Applications';
-    protected static ?string $navigationLabel = 'Member Applications';
+    
 
     public static function getNavigationBadge(): ?string
     {

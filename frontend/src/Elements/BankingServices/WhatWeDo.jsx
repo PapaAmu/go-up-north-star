@@ -14,8 +14,9 @@ const WhatWeOffer = () => {
   const inView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
-    <div className="container">
+    <div className="container py-28" >
       <section
+      id="banking"
         ref={sectionRef}
         className="rounded-3xl bg-gradient-to-r from-[#e7f5ed] to-white py-12"
       >
