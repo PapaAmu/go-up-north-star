@@ -1,35 +1,66 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
+import useMembershipFormStore from '../../../../../Store/useMembershipFormStore';
 
-const Step2SharesAndSavings = ({ setShares, setSavings }) => {
-  const [shareAmount, setShareAmount] = useState("");
-  const [monthlySavings, setMonthlySavings] = useState("");
+const Step2SharesAndSavings = () => {
+  const { formData, updateFormData } = useMembershipFormStore();
+
+  const [shareAmount, setShareAmount] = useState(formData.shares || '');
+  const [monthlySavings, setMonthlySavings] = useState(
+    formData.monthlySavings || ''
+  );
 
   const handleShareAmountChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && value >= 2000 && value <= 25000) {
-      setShares(value);
-    } else {
-      setShares("");
-    }
     setShareAmount(value);
   };
 
   const handleMonthlySavingsChange = (e) => {
     const value = e.target.value;
-    if (!isNaN(value) && value >= 500) {
-      setSavings(value);
-    } else {
-      setSavings("");
-    }
     setMonthlySavings(value);
+  };
+
+  useEffect(() => {
+    const parsedShares = parseFloat(shareAmount);
+    const parsedSavings = parseFloat(monthlySavings);
+
+    updateFormData({
+      shares:
+        !isNaN(parsedShares) && parsedShares >= 2000 && parsedShares <= 25000
+          ? parsedShares
+          : '',
+      monthlySavings:
+        !isNaN(parsedSavings) && parsedSavings >= 500 ? parsedSavings : '',
+    });
+  }, [shareAmount, monthlySavings, updateFormData]);
+
+  Step2SharesAndSavings.isStepValid = () => {
+    const parsedShares = parseFloat(shareAmount);
+    const parsedSavings = parseFloat(monthlySavings);
+
+    if (isNaN(parsedShares) || parsedShares < 2000 || parsedShares > 25000) {
+      toast.error('Share purchase amount must be between R2,000 and R25,000.');
+      return false;
+    }
+
+    if (isNaN(parsedSavings) || parsedSavings < 500) {
+      toast.error('Monthly savings must be at least R500.');
+      return false;
+    }
+
+    return true;
   };
 
   return (
     <div className="space-y-6 text-sm text-gray-800">
-      <h2 className="text-2xl font-bold text-amber-700">
-        Shares & Monthly Savings
-      </h2>
+      <div className="flex justify-center gap-4 border-b py-2">
+        <p className="px-3 py-1 text-2xl rounded-full bg-primary font-extrabold text-amber-800">
+          2
+        </p>
+        <h2 className="text-3xl font-semibold text-amber-800">
+          Shares and Savings section
+        </h2>
+      </div>
 
       <p>
         Please indicate how much you would like to invest in shares and how much
@@ -54,8 +85,8 @@ const Step2SharesAndSavings = ({ setShares, setSavings }) => {
             placeholder="e.g. 5000"
             className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 ${
               shareAmount && (shareAmount < 2000 || shareAmount > 25000)
-                ? "border-red-500"
-                : "border-gray-300"
+                ? 'border-red-500'
+                : 'border-gray-300'
             }`}
           />
           {shareAmount && (shareAmount < 2000 || shareAmount > 25000) && (
@@ -80,8 +111,8 @@ const Step2SharesAndSavings = ({ setShares, setSavings }) => {
             placeholder="e.g. 750"
             className={`w-full border rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-amber-500 ${
               monthlySavings && monthlySavings < 500
-                ? "border-red-500"
-                : "border-gray-300"
+                ? 'border-red-500'
+                : 'border-gray-300'
             }`}
           />
           {monthlySavings && monthlySavings < 500 && (
@@ -93,24 +124,6 @@ const Step2SharesAndSavings = ({ setShares, setSavings }) => {
       </div>
     </div>
   );
-};
-
-// Static method for parent modal to validate this step
-Step2SharesAndSavings.isStepValid = (shareAmount, monthlySavings) => {
-  const shareValue = parseFloat(shareAmount);
-  const savingsValue = parseFloat(monthlySavings);
-
-  if (isNaN(shareValue) || shareValue < 2000 || shareValue > 25000) {
-    toast.error("Share purchase amount must be between R2,000 and R25,000.");
-    return false;
-  }
-
-  if (isNaN(savingsValue) || savingsValue < 500) {
-    toast.error("Monthly savings must be at least R500.");
-    return false;
-  }
-
-  return true;
 };
 
 export default Step2SharesAndSavings;

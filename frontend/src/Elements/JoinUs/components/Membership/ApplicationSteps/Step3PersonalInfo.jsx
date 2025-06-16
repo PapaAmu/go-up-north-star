@@ -1,81 +1,76 @@
-import { useState } from "react";
-import toast from "react-hot-toast";
+import { useEffect, useState } from "react";
+import useMembershipFormStore from "../../../../../Store/useMembershipFormStore";
 
-const Step3PersonalInformation = ({
-  setPhone,
-  setEmail,
-  setIdType,
-  setIdNumber,
-  setStep3Valid,
-}) => {
-  const [gender, setGender] = useState("");
-  const [idType, setLocalIdType] = useState("ID");
-  const [idNumber, setLocalIdNumber] = useState("");
-  const [phone, setLocalPhone] = useState("");
-  const [email, setLocalEmail] = useState("");
-  const [profession, setProfession] = useState("");
-  const [occupation, setOccupation] = useState("");
+const Step3PersonalInformation = ({ setStep3Valid }) => {
+  const { formData, updateFormData } = useMembershipFormStore();
 
-  const handleFormChange = () => {
-    const isFormValid = Boolean(
-      gender &&
-      idNumber &&
-      phone &&
-      email &&
-      profession &&
-      occupation
-    );
+  const [localGender, setLocalGender] = useState(formData.gender || "");
+  const [localIdType, setLocalIdType] = useState(formData.idType || "ID");
+  const [localIdNumber, setLocalIdNumber] = useState(formData.idNumber || "");
+  const [localPhone, setLocalPhone] = useState(formData.phone || "");
+  const [localEmail, setLocalEmail] = useState(formData.email || "");
+  const [localProfession, setLocalProfession] = useState(formData.profession || "");
+  const [localOccupation, setLocalOccupation] = useState(formData.occupation || "");
 
-    setStep3Valid(isFormValid);
-  };
+  useEffect(() => {
+    const isValid =
+      localGender &&
+      localIdNumber &&
+      localPhone &&
+      localEmail &&
+      localProfession &&
+      localOccupation &&
+      (localIdType === "Passport" || localIdNumber.length === 13);
 
-  const handleSubmit = () => {
-    if (
-      !gender ||
-      !idNumber ||
-      !phone ||
-      !email ||
-      !profession ||
-      !occupation
-    ) {
-      toast.error("Please complete all fields.");
-      return;
+    setStep3Valid(isValid);
+
+    if (isValid) {
+      updateFormData({
+        gender: localGender,
+        idType: localIdType,
+        idNumber: localIdNumber,
+        phone: localPhone,
+        email: localEmail,
+        profession: localProfession,
+        occupation: localOccupation,
+      });
     }
-
-    if (idType === "ID" && idNumber.length !== 13) {
-      toast.error("South African ID must be 13 digits.");
-      return;
-    }
-
-    setIdType(idType);
-    setIdNumber(idNumber);
-    setPhone(phone);
-    setEmail(email);
-  };
+  }, [
+    localGender,
+    localIdType,
+    localIdNumber,
+    localPhone,
+    localEmail,
+    localProfession,
+    localOccupation,
+    updateFormData,
+    setStep3Valid,
+  ]);
 
   return (
     <div className="space-y-6 text-sm text-gray-800">
       <h2 className="text-2xl font-bold text-amber-700">Personal Information</h2>
 
-      <form className="space-y-4" onChange={handleFormChange}>
+      <form className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="font-medium">Gender</label>
             <select
-              value={gender}
-              onChange={(e) => setGender(e.target.value)}
+              value={localGender}
+              onChange={(e) => setLocalGender(e.target.value)}
               className="w-full border rounded-md px-3 py-2"
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
           <div>
             <label className="font-medium">ID Type</label>
             <select
-              value={idType}
+              value={localIdType}
               onChange={(e) => setLocalIdType(e.target.value)}
               className="w-full border rounded-md px-3 py-2"
             >
@@ -89,7 +84,7 @@ const Step3PersonalInformation = ({
           <label className="font-medium">ID Number</label>
           <input
             type="text"
-            value={idNumber}
+            value={localIdNumber}
             onChange={(e) => setLocalIdNumber(e.target.value)}
             placeholder="e.g. 8501011234087"
             className="w-full border rounded-md px-3 py-2"
@@ -101,7 +96,7 @@ const Step3PersonalInformation = ({
             <label className="font-medium">Cell Number</label>
             <input
               type="tel"
-              value={phone}
+              value={localPhone}
               onChange={(e) => setLocalPhone(e.target.value)}
               placeholder="e.g. 0812345678"
               className="w-full border rounded-md px-3 py-2"
@@ -112,7 +107,7 @@ const Step3PersonalInformation = ({
             <label className="font-medium">Email Address</label>
             <input
               type="email"
-              value={email}
+              value={localEmail}
               onChange={(e) => setLocalEmail(e.target.value)}
               placeholder="e.g. you@example.com"
               className="w-full border rounded-md px-3 py-2"
@@ -125,8 +120,8 @@ const Step3PersonalInformation = ({
             <label className="font-medium">Profession</label>
             <input
               type="text"
-              value={profession}
-              onChange={(e) => setProfession(e.target.value)}
+              value={localProfession}
+              onChange={(e) => setLocalProfession(e.target.value)}
               className="w-full border rounded-md px-3 py-2"
             />
           </div>
@@ -134,8 +129,8 @@ const Step3PersonalInformation = ({
             <label className="font-medium">Occupation</label>
             <input
               type="text"
-              value={occupation}
-              onChange={(e) => setOccupation(e.target.value)}
+              value={localOccupation}
+              onChange={(e) => setLocalOccupation(e.target.value)}
               className="w-full border rounded-md px-3 py-2"
             />
           </div>
