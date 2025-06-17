@@ -1,3 +1,4 @@
+// useMembershipFormStore.js
 import { create } from 'zustand';
 
 const useMembershipFormStore = create((set) => ({
@@ -14,6 +15,10 @@ const useMembershipFormStore = create((set) => ({
     physicalAddress: '',
     postalAddress: '',
     inviterName: '',
+    idCopy: null,
+    proofOfAddress: null,
+    termsAccepted: false,
+    popiAccepted: false,
 
     beneficiary: {
       firstName: '',

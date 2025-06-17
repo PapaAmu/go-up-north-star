@@ -1,60 +1,34 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import useMembershipFormStore from '../../../../Store/useMembershipFormStore';
 import Step1TermsAndConditions from './ApplicationSteps/Step1Terms';
 import Step2SharesAndSavings from './ApplicationSteps/Step2Shares';
 import Step3PersonalInformation from './ApplicationSteps/Step3PersonalInfo';
 import Step4AdditionalDetails from './ApplicationSteps/Step4AdditionalDetails';
 import Step5BeneficiaryDetails from './ApplicationSteps/Step5Beneficiary';
 import Step6ReviewSummary from './ApplicationSteps/Step6ReviewSummary';
+import Step7UploadFiles from './ApplicationSteps/Step7UploadFiles';
 
 const MembershipModal = ({ open, onClose }) => {
+  const { formData } = useMembershipFormStore();
   const [currentStep, setCurrentStep] = useState(1);
-
-  // Step 1–3
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
-  const [gender, setGender] = useState('');
-  const [profession, setProfession] = useState('');
-  const [occupation, setOccupation] = useState('');
-  const [idType, setIdType] = useState('ID');
-  const [idNumber, setIdNumber] = useState('');
-  const [shares, setShares] = useState('');
-  const [savings, setSavings] = useState('');
-
-  // Step 4 - Additional details
-  const [qualification, setQualification] = useState('');
-  const [physicalAddress, setPhysicalAddress] = useState('');
-  const [postalAddress, setPostalAddress] = useState('');
-  const [inviterName, setInviterName] = useState('');
-
-  // Step 5
-  const [beneficiaryFirstName, setBeneficiaryFirstName] = useState('');
-  const [beneficiaryLastName, setBeneficiaryLastName] = useState('');
-  const [beneficiaryIdNumber, setBeneficiaryIdNumber] = useState('');
-  const [beneficiaryRelationship, setBeneficiaryRelationship] = useState('');
-  const [beneficiaryPhone, setBeneficiaryPhone] = useState('');
-  const [beneficiaryEmail, setBeneficiaryEmail] = useState('');
 
   // Validation flags for steps with complex validation
   const [isStep3Valid, setIsStep3Valid] = useState(false);
   const [isStep4Valid, setIsStep4Valid] = useState(false);
-
   const [isStep5Valid, setIsStep5Valid] = useState(false);
+  const [isStep7Valid, setIsStep7Valid] = useState(false);
 
   const handleNextStep = () => {
     let isValid = true;
 
     switch (currentStep) {
       case 1:
-        // Assuming Step1TermsAndConditions exports a static validator
-        isValid = Step1TermsAndConditions.isStepValid?.() ?? true;
+        isValid = true;
         break;
 
       case 2:
-        // Assuming Step2SharesAndSavings exports a static validator
-        isValid = Step2SharesAndSavings.isStepValid?.(shares, savings) ?? true;
+        isValid = true;
         break;
 
       case 3:
@@ -63,11 +37,18 @@ const MembershipModal = ({ open, onClose }) => {
 
       case 4:
         isValid = isStep4Valid;
-
         break;
 
       case 5:
         isValid = isStep5Valid;
+        break;
+
+      case 6:
+        isValid = true;
+        break;
+
+      case 7:
+        isValid = isStep7Valid;
         break;
 
       default:
@@ -79,7 +60,7 @@ const MembershipModal = ({ open, onClose }) => {
       return;
     }
 
-    if (currentStep < 6) {
+    if (currentStep < 7) {
       setCurrentStep((prev) => prev + 1);
     } else {
       handleSubmit();
@@ -91,39 +72,45 @@ const MembershipModal = ({ open, onClose }) => {
   };
 
   const handleSubmit = async () => {
-    const formData = new FormData();
-    formData.append('first_name', firstName);
-    formData.append('last_name', lastName);
-    formData.append('phone', phone);
-    formData.append('email', email);
-    formData.append('id_type', idType);
-    formData.append('id_number', idNumber);
-    formData.append('gender', gender);
-    formData.append('profession', profession);
-    formData.append('occupation', occupation);
-    formData.append('shares', shares);
-    formData.append('monthly_savings', savings);
-
-    // Step 4 additions
-    formData.append('qualification', qualification);
-    formData.append('physical_address', physicalAddress);
-    formData.append('postal_address', postalAddress);
-    formData.append('inviter_name', inviterName);
-
-    const beneficiaryFullName =
-      `${beneficiaryFirstName} ${beneficiaryLastName}`.trim();
-    formData.append('beneficiary_full_name', beneficiaryFullName);
-    formData.append('beneficiary_id_number', beneficiaryIdNumber);
-    formData.append('beneficiary_relationship', beneficiaryRelationship);
-    formData.append('beneficiary_phone', beneficiaryPhone);
-    formData.append('beneficiary_email', beneficiaryEmail);
+    const formDataToSend = new FormData();
+    formDataToSend.append('first_name', formData.firstName);
+    formDataToSend.append('last_name', formData.lastName);
+    formDataToSend.append('phone', formData.phone);
+    formDataToSend.append('email', formData.email);
+    formDataToSend.append('id_type', formData.idType);
+    formDataToSend.append('id_number', formData.idNumber);
+    formDataToSend.append('gender', formData.gender);
+    formDataToSend.append('profession', formData.profession);
+    formDataToSend.append('occupation', formData.occupation);
+    formDataToSend.append('shares', formData.shares);
+    formDataToSend.append('monthly_savings', formData.savings);
+    formDataToSend.append('qualification', formData.qualification);
+    formDataToSend.append('physical_address', formData.physicalAddress);
+    formDataToSend.append('postal_address', formData.postalAddress);
+    formDataToSend.append('inviter_name', formData.inviterName);
+    formDataToSend.append(
+      'beneficiary_full_name',
+      `${formData.beneficiary.firstName} ${formData.beneficiary.lastName}`
+    );
+    formDataToSend.append(
+      'beneficiary_id_number',
+      formData.beneficiary.idNumber
+    );
+    formDataToSend.append(
+      'beneficiary_relationship',
+      formData.beneficiary.relationship
+    );
+    formDataToSend.append('beneficiary_phone', formData.beneficiary.phone);
+    formDataToSend.append('beneficiary_email', formData.beneficiary.email);
+    formDataToSend.append('id_copy', formData.idCopy);
+    formDataToSend.append('proof_of_address', formData.proofOfAddress);
 
     try {
       const response = await fetch(
         `${import.meta.env.VITE_API_BASE_URL}/api/memberships`,
         {
           method: 'POST',
-          body: formData,
+          body: formDataToSend,
         }
       );
 
@@ -153,72 +140,20 @@ const MembershipModal = ({ open, onClose }) => {
           &times;
         </button>
 
-        {currentStep === 1 && (
-          <Step1TermsAndConditions
-            setFirstName={setFirstName}
-            setLastName={setLastName}
-          />
-        )}
-
-        {currentStep === 2 && (
-          <Step2SharesAndSavings
-            setShares={setShares}
-            setSavings={setSavings}
-          />
-        )}
-
+        {currentStep === 1 && <Step1TermsAndConditions />}
+        {currentStep === 2 && <Step2SharesAndSavings />}
         {currentStep === 3 && (
-          <Step3PersonalInformation
-            setPhone={setPhone}
-            setEmail={setEmail}
-            setIdType={setIdType}
-            setIdNumber={setIdNumber}
-            setGender={setGender}
-            setProfession={setProfession}
-            setOccupation={setOccupation}
-            setStep3Valid={setIsStep3Valid}
-          />
+          <Step3PersonalInformation setStep3Valid={setIsStep3Valid} />
         )}
-
         {currentStep === 4 && (
-          <Step4AdditionalDetails
-            setQualification={setQualification}
-            setPhysicalAddress={setPhysicalAddress}
-            setPostalAddress={setPostalAddress}
-            setInviterName={setInviterName}
-            setStep4Valid={setIsStep4Valid}
-          />
+          <Step4AdditionalDetails setStep4Valid={setIsStep4Valid} />
         )}
-
         {currentStep === 5 && (
-          <Step5BeneficiaryDetails
-            setBeneficiaryFirstName={setBeneficiaryFirstName}
-            setBeneficiaryLastName={setBeneficiaryLastName}
-            setBeneficiaryIdNumber={setBeneficiaryIdNumber}
-            setBeneficiaryRelationship={setBeneficiaryRelationship}
-            setBeneficiaryPhone={setBeneficiaryPhone}
-            setBeneficiaryEmail={setBeneficiaryEmail}
-            setStep5Valid={setIsStep5Valid}
-          />
+          <Step5BeneficiaryDetails setStep5Valid={setIsStep5Valid} />
         )}
-
-        {currentStep === 6 && (
-          <Step6ReviewSummary
-            firstName={firstName}
-            lastName={lastName}
-            phone={phone}
-            email={email}
-            idType={idType}
-            idNumber={idNumber}
-            shares={shares}
-            savings={savings}
-            beneficiaryFirstName={beneficiaryFirstName}
-            beneficiaryLastName={beneficiaryLastName}
-            beneficiaryIdNumber={beneficiaryIdNumber}
-            beneficiaryRelationship={beneficiaryRelationship}
-            beneficiaryPhone={beneficiaryPhone}
-            beneficiaryEmail={beneficiaryEmail}
-          />
+        {currentStep === 6 && <Step6ReviewSummary />}
+        {currentStep === 7 && (
+          <Step7UploadFiles setStep7Valid={setIsStep7Valid} />
         )}
 
         <div className="flex justify-center gap-4 items-center mt-6">
@@ -237,7 +172,7 @@ const MembershipModal = ({ open, onClose }) => {
             onClick={handleNextStep}
             className="px-6 py-2 text-white font-semibold bg-amber-600 hover:bg-amber-700 rounded-full shadow"
           >
-            {currentStep < 6 ? 'Next' : 'Submit'}
+            {currentStep < 7 ? 'Next' : 'Submit'}
           </button>
         </div>
       </div>
