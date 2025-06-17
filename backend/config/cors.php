@@ -21,7 +21,7 @@ return [
 
    'allowed_methods' => ['*'], // Allow all HTTP methods
 
-   'allowed_origins' => ['http://localhost:5000'],
+   'allowed_origins' => ['http://localhost:5000','https://go-up-northstar.co.za/'],
 
    'allowed_origins_patterns' => [],
 

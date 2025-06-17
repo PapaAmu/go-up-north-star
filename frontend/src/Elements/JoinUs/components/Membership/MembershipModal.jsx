@@ -83,7 +83,7 @@ const MembershipModal = ({ open, onClose }) => {
     formDataToSend.append('profession', formData.profession);
     formDataToSend.append('occupation', formData.occupation);
     formDataToSend.append('shares', formData.shares);
-    formDataToSend.append('monthly_savings', formData.savings);
+    formDataToSend.append('monthly_savings', formData.monthlySavings);
     formDataToSend.append('qualification', formData.qualification);
     formDataToSend.append('physical_address', formData.physicalAddress);
     formDataToSend.append('postal_address', formData.postalAddress);
