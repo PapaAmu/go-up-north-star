@@ -104,6 +104,8 @@ const MembershipModal = ({ open, onClose }) => {
     formDataToSend.append('beneficiary_email', formData.beneficiary.email);
     formDataToSend.append('id_copy', formData.idCopy);
     formDataToSend.append('proof_of_address', formData.proofOfAddress);
+    formDataToSend.append('terms_accepted', formData.termsAccepted ? '1' : '0');
+    formDataToSend.append('popi_accepted', formData.popiAccepted ? '1' : '0');
 
     try {
       const response = await fetch(
@@ -162,7 +164,7 @@ const MembershipModal = ({ open, onClose }) => {
               onClick={handlePreviousStep}
               className="px-4 py-2 rounded-full font-semibold bg-gray-800 hover:bg-gray-400 text-primary"
             >
-              Previous
+              Back
             </button>
           ) : (
             <div />

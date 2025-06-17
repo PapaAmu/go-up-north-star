@@ -5,36 +5,64 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Membership;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class MembershipController extends Controller
 {
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'required|email|max:255',
-            'phone'      => 'required|string|max:20',
-            'id_type'    => 'required|in:ID,Passport',
-            'id_number'  => 'required|string|max:20',
-            'shares'     => 'required|integer|min:10',
-            'accepted_terms' => 'required|boolean',
-            'read_terms'     => 'required|boolean',
-            'proof_of_payment' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
-        ]);
+        try {
+            $validated = $request->validate([
+                'first_name' => 'required|string|max:255',
+                'last_name'  => 'required|string|max:255',
+                'email'      => 'required|email|max:255|unique:memberships,email',
+                'phone'      => 'required|string|max:20',
+                'id_type'    => 'required|in:ID,Passport',
+                'id_number'  => 'required|string|max:20',
+                'gender'     => 'required|string',
+                'profession' => 'required|string',
+                'occupation' => 'required|string',
+                'shares'     => 'required|integer',
+                'monthly_savings' => 'required|integer',
+                'qualification' => 'required|string',
+                'physical_address' => 'required|string',
+                'postal_address' => 'required|string',
+                'inviter_name' => 'required|string',
+                'beneficiary_full_name' => 'required|string',
+                'beneficiary_id_number' => 'required|string',
+                'beneficiary_relationship' => 'required|string',
+                'beneficiary_phone' => 'required|string',
+                'beneficiary_email' => 'required|email',
+                'terms_accepted' => 'required|boolean',
+                'popi_accepted' => 'required|boolean',
+                'id_copy' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+                'proof_of_address' => 'required|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            ]);
 
-        $path = null;
-        if ($request->hasFile('proof_of_payment')) {
-            $path = $request->file('proof_of_payment')->store('proofs', 'public');
+            $idCopyPath = $request->file('id_copy')->store('id_copies', 'public');
+            $proofOfAddressPath = $request->file('proof_of_address')->store('proofs_of_address', 'public');
+
+            $membership = Membership::create(array_merge(
+                $validated,
+                [
+                    'id_copy_path' => $idCopyPath,
+                    'proof_of_address_path' => $proofOfAddressPath,
+                    'status' => 'pending',
+                ]
+            ));
+
+            return response()->json([
+                'message' => 'Membership submitted successfully.',
+                'membership' => $membership,
+            ], 201);
+
+        } catch (\Throwable $e) {
+            Log::error('Membership submission failed: ' . $e->getMessage());
+
+            return response()->json([
+                'error' => 'Submission failed',
+                'details' => $e->getMessage(),
+            ], 500);
         }
-
-        $membership = Membership::create([
-            ...$validated,
-            'proof_of_payment_path' => $path,
-            'status' => 'pending',
-        ]);
-
-        return response()->json(['message' => 'Membership submitted', 'membership' => $membership], 201);
     }
 }
-

@@ -1,5 +1,7 @@
 <?php
 
+use PhpParser\Node\Stmt\TraitUseAdaptation;
+
 return [
 
     /*
@@ -19,7 +21,7 @@ return [
 
    'allowed_methods' => ['*'], // Allow all HTTP methods
 
-   'allowed_origins' => ['http://localhost:5000', 'https://go-up-northstar.co.za'],
+   'allowed_origins' => ['http://localhost:5000'],
 
    'allowed_origins_patterns' => [],
 
@@ -29,6 +31,6 @@ return [
 
    'max_age' => 0,
 
-   'supports_credentials' => false,
+   'supports_credentials' => true,
 
 ];

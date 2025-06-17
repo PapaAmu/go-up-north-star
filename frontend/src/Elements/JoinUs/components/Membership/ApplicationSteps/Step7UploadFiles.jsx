@@ -85,7 +85,9 @@ const Step7UploadFiles = ({ setStep7Valid }) => {
   return (
     <div className="space-y-4">
       <div className="flex justify-center gap-4 border-b py-2">
-        <p className="px-3 py-1 text-2xl rounded-full bg-primary">7</p>
+        <p className="px-3.5 font-extrabold text-amber-800 py-1 text-2xl rounded-full bg-primary">
+          7
+        </p>
         <h2 className="text-3xl font-semibold text-amber-800">
           Upload Documents
         </h2>
@@ -93,7 +95,9 @@ const Step7UploadFiles = ({ setStep7Valid }) => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="border p-4 rounded-lg">
-          <h3 className="text-xl font-bold text-primary mb-1">ID Copy</h3>
+          <h3 className="text-xl font-bold text-primary mb-1">
+            ID Copy / Passport
+          </h3>
           <div
             {...getIdCopyRootProps()}
             className={`border-2 border-dashed p-8 rounded-lg text-center ${
@@ -104,13 +108,13 @@ const Step7UploadFiles = ({ setStep7Valid }) => {
             {isDragActiveIdCopy ? (
               <p className="text-lg">Drop the ID copy here ...</p>
             ) : (
-              <p className="text-lg">
+              <p className="text-lime-400">
                 Drag 'n' drop ID copy here, or click to select file
               </p>
             )}
           </div>
           {formData.idCopy && (
-            <p>
+            <p className="text-sm text-red-700 mt-2">
               ID Copy: {formData.idCopy.name} (
               {(formData.idCopy.size / 1024).toFixed(2)} KB)
             </p>
@@ -132,13 +136,13 @@ const Step7UploadFiles = ({ setStep7Valid }) => {
             {isDragActiveProofOfAddress ? (
               <p className="text-lg">Drop the Proof of Address here ...</p>
             ) : (
-              <p className="text-lg">
-                Drag 'n' drop Proof of Address here, or click to select file
+              <p className="text-lime-400">
+                Drag 'n' drop ID copy here, or click to select file
               </p>
             )}
           </div>
           {formData.proofOfAddress && (
-            <p>
+            <p className="text-sm text-red-700 mt-2">
               Proof of Address: {formData.proofOfAddress.name} (
               {(formData.proofOfAddress.size / 1024).toFixed(2)} KB)
             </p>
@@ -150,22 +154,30 @@ const Step7UploadFiles = ({ setStep7Valid }) => {
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold text-primary">
-          Terms and Conditions
-        </h2>
-        <p>Please read and accept our terms and conditions.</p>
+        <h2 className="text-xl font-bold text-primary">Terms and Conditions</h2>
+        <p className="text-gray-500">
+          Please read and accept our terms and conditions.
+        </p>
         <label className="flex items-center gap-2">
           <input
             type="checkbox"
             checked={formData.termsAccepted}
             onChange={handleTermsChange}
           />
-          I accept the terms and conditions
+          I accept the{' '}
+          <a
+            href="/terms-and-conditions"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-amber-500 underline hover:text-amber-800"
+          >
+            terms and conditions
+          </a>
         </label>
       </div>
 
       <div className="space-y-2">
-        <h2 className="text-2xl font-bold text-primary">POPI Declaration</h2>
+        <h2 className="text-xl font-bold text-primary">POPI Declaration</h2>
         <p>Please read and accept our POPI declaration.</p>
         <label className="flex items-center gap-2">
           <input
