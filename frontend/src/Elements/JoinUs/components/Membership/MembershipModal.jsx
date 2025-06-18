@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import useMembershipFormStore from '../../../../Store/useMembershipFormStore';
 import Step1TermsAndConditions from './ApplicationSteps/Step1Terms';
 import Step2SharesAndSavings from './ApplicationSteps/Step2Shares';
@@ -12,6 +13,7 @@ import Step7UploadFiles from './ApplicationSteps/Step7UploadFiles';
 const MembershipModal = ({ open, onClose }) => {
   const { formData } = useMembershipFormStore();
   const [currentStep, setCurrentStep] = useState(1);
+  const navigate = useNavigate();
 
   // Validation flags for steps with complex validation
   const [isStep3Valid, setIsStep3Valid] = useState(false);
@@ -118,7 +120,7 @@ const MembershipModal = ({ open, onClose }) => {
 
       if (response.ok) {
         toast.success('Membership application submitted successfully!');
-        onClose();
+        navigate('/application-success');
       } else {
         const errorData = await response.json();
         toast.error(errorData.message || 'Error submitting your application.');
